@@ -1075,7 +1075,7 @@ setupTasks.push( function(){
 		presetBling: function(){
 
 			var cube = this
-
+			
 			this.threeObject.position.y = -2000
 			new TWEEN.Tween( this.threeObject.position )
 				.to({ 
@@ -1106,7 +1106,6 @@ setupTasks.push( function(){
 				.start()
 			this.isReady = false
 
-			
 			//  And we want each Cubelet to begin in an exploded position and tween inward.
 
 			this.cubelets.forEach( function( cubelet ){
@@ -1147,6 +1146,8 @@ setupTasks.push( function(){
 					.onComplete( function(){
 
 						cubelet.isTweening = false
+						cubelet.hidePhotos() // photocube disappears piece by piece
+
 					})
 					.start()
 				
@@ -1163,6 +1164,26 @@ setupTasks.push( function(){
 			this.showIntroverts()
 			this.showPlastics()
 			this.showStickers()
+			//this.showLogo()
+			this.hidePhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+		},
+		presetPhoto: function(){
+
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+			//this.hideLogo()
+			this.showPhotos()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1183,6 +1204,7 @@ setupTasks.push( function(){
 				cube.show()
 				cube.hidePlastics()
 				cube.hideStickers()
+				cube.hidePhotos()
 				cube.hideIds()
 				cube.hideIntroverts()
 				cube.showTexts()

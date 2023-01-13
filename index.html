@@ -36,9 +36,15 @@
 		<script charset="utf-8" src="scripts/folds.js"></script>
 		<script charset="utf-8" src="scripts/cubes.js"></script>		
 		<script charset="utf-8" src="scripts/solvers.js"></script>
-		<script charset="utf-8" src="scripts/solvers/stewart.js"></script>		
-		<script charset="utf-8" src="scripts/erno.js"></script>		
-	
+		<!--<script charset="utf-8" src="scripts/solvers/stewart.js"></script>		-->
+		<script charset="utf-8" src="scripts/solvers/rubik-robot1-clock-data.js"></script>		
+		<script charset="utf-8" src="scripts/solvers/clock.js"></script>		
+		
+		<!-- high-level and state setup.  And start the main loop-->
+		<script charset="utf-8" src="scripts/erno.js"></script>
+
+
+		
 
 	</head>
 	<body class="graydient">
@@ -65,6 +71,7 @@
 				<div id="presets">
 					<h2>Presets</h2>
 					<a href="javascript:cube.presetNormal()">Normal</a>
+					<a href="javascript:cube.presetPhoto()">Photocube</a>
 					<a href="javascript:cube.presetText()">Text</a>
 					<a href="javascript:cube.presetWireframe()">Wireframe</a>
 					<a href="javascript:cube.presetPurty()">Purty colors</a>
@@ -84,6 +91,7 @@
 					<label><input type="checkbox" id="attributePlastics"   checked>Plastic surfaces</label>
 					<label><input type="checkbox" id="attributeIntroverts" checked>Introvert surfaces</label>
 					<label><input type="checkbox" id="attributeStickers"   checked>Color stickers</label>
+					<label><input type="checkbox" id="attributePhotos"     checked>Photo Cube</label>
 					<label><input type="checkbox" id="attributeIds"        checked>Cubelet Ids</label>
 					<label><input type="checkbox" id="attributeTexts"      checked>Texts</label>
 					<label><input type="checkbox" id="attributeWireframes" checked>Wireframes</label>
@@ -98,7 +106,8 @@
 					<a href="javascript:cube.presetDemoStop()">Stop demo mode</a>
 					<a href="javascript:cube.isShuffling=true;cube.isRotating=true;updateControls()">Start shuffle &amp; rotate</a>
 					<a href="javascript:cube.isShuffling=false;cube.isRotating=false;updateControls()">Stop shuffle &amp; rotate</a>
-					<a href="javascript:cube.solve()">Solve the Top Cross</a>
+					<!-- <a href="javascript:cube.solve()">Solve the Top Cross</a> -->
+					<a href="javascript:cube.presetPhoto(); javascript:cube.solve()">Rubik's Clock</a>
 					<label><input type="checkbox" id="actionShuffle">Shuffle</label>
 					<label><input type="checkbox" id="actionRotate">Auto rotate</label>
 					<label><input type="checkbox" id="actionNotation">Show twist notation</label>
@@ -128,9 +137,6 @@
 						<a class="key" href="javascript:cube.twistQueue.add('B')">B</a><a class="key" href="javascript:cube.twistQueue.add('b')">b</a> back face<br>
 					</div>
 				</div>
-
-
-
 
 				<div>
 					<h2>Texts</h2>

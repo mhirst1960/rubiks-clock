@@ -329,6 +329,31 @@ setupTasks.push( function(){
 			this.cubelets.forEach( function( cubelet ){ cubelet.hideStickers() })
 			return this
 		},
+		showLogo: function(){
+			// Technically this only affects one cubelet but we can do them all.  It doesn't hurt.
+			this.cubelets.forEach( function( cubelet ){ cubelet.showLogo() })
+			return this
+		},
+		hideLogo: function(){
+
+			this.cubelets.forEach( function( cubelet ){ cubelet.hideLogo() })
+			return this
+		},
+		showPhotos: function(){
+			this.cubelets.forEach( function( cubelet ){
+				// If someone wants the logo on a photocube it can be incorporated into front photo
+				cubelet.hideLogo()
+				cubelet.showPhotos()
+			})
+			return this
+		},
+		hidePhotos: function(){
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.showLogo()
+				cubelet.hidePhotos()
+			})
+			return this
+		},
 		showWireframes: function(){
 
 			this.cubelets.forEach( function( cubelet ){ cubelet.showWireframes() })

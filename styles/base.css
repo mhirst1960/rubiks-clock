@@ -298,11 +298,60 @@ table, td, tr {
 }
 .stickerLogo {
 
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	
 	background-image: url( "../media/rubiksLogoClassic.png" );	
 	background-size: 120px 120px;
 	background-repeat: none;
 }
 
+/*
+
+    PHOTOCUBE
+
+	Support for pasting a photo of other png/jpg
+	image on each side of the cube.  Each of 6 custom
+	images is split into 9 pieces and pasted to the
+	sticker on a cublet.  Photos are oriented it looks
+	good when viewed from looking down at the front and
+	top of the cube.  So some photos need to be statically
+	rotated so they look good when cube face up is up.
+
+*/
+
+/* Photocube image pieces on each side of a cubelet */
+.photo {
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+/* Some photocube images need to be rotated depending on the side the image is on */
+.rotate90 {
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
 
 /*
 
@@ -364,7 +413,7 @@ table, td, tr {
 	width:  100%;
 	height: 100%;
 	text-align: center;
-	color: #FFF;
+	color: #444;
 	font-family: "RubikExtended", sans-serif;
 	font-size:   150px;
 	line-height: 170px;
