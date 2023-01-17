@@ -1,5 +1,6 @@
 
-
+// Cycle through canned sequence of moves that show the time of day on the
+// front of the Rubik's cube
 
 useFakeTime = false // set to true for debugging startup
 
@@ -49,6 +50,19 @@ solver.consider = function( cube ){
 
 solver.logic = function( cube ){
 
+    var reverseMoves = function(moves){
+        var newMoves = "";
+        for(var i = moves.length-1 ; i>=0; i--){
+            if(moves[i] === moves[i].toLowerCase()){
+                newMoves += moves[i].toUpperCase();
+            }else {
+                newMoves += moves[i].toLowerCase();
+            }
+        }
+        // console.log(newLetters);
+        return newMoves;
+    }
+
     function showCatchup( cube ){
 
         //cube.show()
@@ -81,7 +95,8 @@ solver.logic = function( cube ){
 
     clockIsSolved = false
     // Sticker images (photos) are in media/TMWClock
-    var moves = rubikRobot1Moves
+    // var moves = rubikRobot1Moves
+    var clockData = rubiksClockData
 
     if (clockIndex >= 60*24) {
         clockIndex = 0
@@ -99,10 +114,13 @@ solver.logic = function( cube ){
         minutesSinceMidnight -= startMinutesSinceMidnight
     }
 
-
-    if (minutesSinceMidnight - clockIndex > 3) {
+    // TODO probably want to just continue with the sequence
+    //      if we are behind by just a few minutes.  Just do
+    //      it a few times and we wil be caught up
+    
+    if (Math.abs(minutesSinceMidnight - clockIndex) > 1) {
         catchUp = true
-        cube.twistDuration = SECOND / 100
+        cube.twistDuration = SECOND / 4
         showCatchup(cube)
     } else if (catchUp) {
         catchUp = false
@@ -110,14 +128,26 @@ solver.logic = function( cube ){
         showNormal(cube)
     }
 
-    for( i = clockIndex; i <= minutesSinceMidnight; i ++ ){
+    if (catchUp) {
 
-        move = moves[i]
+
+        if (clockIndex <= 1) {
+            move = ""
+        } else {
+            move = clockData[clockIndex-1][1]
+        }
+        move += reverseMoves(clockData[minutesSinceMidnight][1])
+        // TODO fix rotation of centers
         cube.twistQueue.add( move )
-        clockIndex += 1
-        //break // debug
-    }
+        clockIndex = minutesSinceMidnight + 1
+    } else {
+        for( i = clockIndex; i <= minutesSinceMidnight; i ++ ){
 
+            move = clockData[i][0]
+            cube.twistQueue.add( move )
+            clockIndex += 1
+        }
+    }
 
     clockIsSolved = true
 
