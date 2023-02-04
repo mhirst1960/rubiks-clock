@@ -65,11 +65,11 @@ solver.logic = function( cube ){
 
     function showCatchup( cube ){
 
-        //cube.show()
+        cube.show()
         cube.hidePlastics()
         cube.hideStickers()
-        //cube.hideLogo()
-        //cube.hidePhotos()
+        cube.hideLogo()
+        cube.showPhotos()
         cube.hideIds()
         cube.hideIntroverts()
         cube.hideTexts()
@@ -98,8 +98,8 @@ solver.logic = function( cube ){
     // var moves = rubikRobot1Moves
     var clockData = rubiksClockData
 
-    if (clockIndex >= 60*24) {
-        clockIndex = 0
+    if (clockIndex > 60*24) {
+        clockIndex -= 60*24
     }
 
     var minutesSinceMidnight
@@ -117,7 +117,7 @@ solver.logic = function( cube ){
     // TODO probably want to just continue with the sequence
     //      if we are behind by just a few minutes.  Just do
     //      it a few times and we wil be caught up
-    
+
     if (Math.abs(minutesSinceMidnight - clockIndex) > 1) {
         catchUp = true
         cube.twistDuration = SECOND / 4

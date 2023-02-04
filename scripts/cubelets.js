@@ -429,11 +429,16 @@ function Cubelet( cube, id, colors ){
 
 				var tmwClock = false
 				var robotClock = true
+				var arrows = false
 
 				if (tmwClock)
 					photoDir = photoDir + "TMWClock"
-				else if (robotClock)
-					photoDir = photoDir + "RobotClock"
+				else if (robotClock){
+					if (arrows)
+						photoDir = photoDir + "arrows"
+					else
+						photoDir = photoDir + "RobotClock"
+				}
 
 				switch (i) {
 					case 0: // white

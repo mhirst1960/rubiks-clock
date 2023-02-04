@@ -1047,7 +1047,18 @@ setupTasks.push( function(){
 		},
 
 
-
+		reverseMoves: function(moves){
+			var newMoves = "";
+			for(var i = moves.length-1 ; i>=0; i--){
+				if(moves[i] === moves[i].toLowerCase()){
+					newMoves += moves[i].toUpperCase();
+				}else {
+					newMoves += moves[i].toLowerCase();
+				}
+			}
+			// console.log(newLetters);
+			return newMoves;
+		},
 
 		showFaceLabels: function(){
 
@@ -1178,18 +1189,83 @@ setupTasks.push( function(){
 			$( 'body' ).css( 'background-color', '#000' )
 			$( 'body' ).addClass( 'graydient' )
 			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-			this.show()
-			this.showIntroverts()
-			this.showPlastics()
-			this.showStickers()
+
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.hide()
+			//this.showIntroverts()
+			this.hidePlastics()
+			this.hideStickers()
 			//this.hideLogo()
-			this.showPhotos()
-			this.hideTexts()
-			this.hideWireframes()
-			this.hideIds()
-			this.setOpacity()
-			this.setRadius()
+			//this.showPhotos()
+			//this.hideTexts()
+			//this.hideWireframes()
+			//this.hideIds()
+			//this.setOpacity()
+			//this.setRadius()
 			updateControls( this )
+
+			this.taskQueue.add(
+
+				function() {
+					$( 'body' ).css( 'background-color', '#000' )
+					$( 'body' ).addClass( 'graydient' )
+					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+					this.hide()
+					//this.showIntroverts()
+					this.hidePlastics()
+					//this.showStickers()
+					//this.hideLogo()
+					//this.showPhotos()
+					//this.hideTexts()
+					//this.hideWireframes()
+					//this.hideIds()
+					//this.setOpacity()
+					//this.setRadius()
+					updateControls( this )
+				},
+				function(){
+					cube.twistQueue.add( 'rdld')
+				},
+				function(){
+
+				//	this.showPhotos()
+				//	updateControls( this )
+
+				//	cube.rotationDeltaX = -0.1
+				//	cube.rotationDeltaY = 0.15
+				//	cube.isRotating = false
+				//	cube.presetNormal()
+				//	this.showStickers()
+				//	cube.taskQueue.isReady = false
+				//	setTimeout( function(){ cube.taskQueue.isReady = true }, SECOND )
+				},
+				function() {
+					$( 'body' ).css( 'background-color', '#000' )
+					$( 'body' ).addClass( 'graydient' )
+					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+					this.show()
+					this.showIntroverts()
+					this.showPlastics()
+					this.showStickers()
+					this.hideLogo()
+					this.showPhotos()
+					this.hideTexts()
+					this.hideWireframes()
+					this.hideIds()
+					this.setOpacity()
+					this.setRadius()
+					updateControls( this )
+				},
+				function(){
+					
+				},
+				function(){
+					cube.twistQueue.add( 'DLDR')
+				},				
+				)
+
 		},
 		presetText: function( virgin ){
 
@@ -1213,6 +1289,235 @@ setupTasks.push( function(){
 				updateControls( cube )
 			
 			}, 1 )
+		},
+		presetClock: function(){
+
+			//$("#favicon").attr("href","media/rubiks-clock-favicon.png")
+			$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
+
+			if( erno.state === 'setup' ) {
+				this.presetBling()
+			//	this.showPhotos()
+			}
+
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+			//this.hideLogo()
+			this.showPhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+
+
+			this.taskQueue.add(
+
+				function() {
+					$( 'body' ).css( 'background-color', '#000' )
+					$( 'body' ).addClass( 'graydient' )
+					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+					this.show()
+					this.showIntroverts()
+					this.showPlastics()
+					this.showStickers()
+					//this.hideLogo()
+					this.showPhotos()
+					this.hideTexts()
+					this.hideWireframes()
+					this.hideIds()
+					this.setOpacity()
+					this.setRadius()
+					updateControls( this )
+				},
+				function() {
+					cube.solve()
+				}
+			)
+
+		},
+		presetExperiments(){
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+			//this.hideLogo()
+			this.showPhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+
+			this.twistDuration = SECOND / 4
+
+			this.taskQueue.add(
+
+				function() {
+					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
+				},
+				function(){
+
+					var clockData = rubiksClockData
+					moves = ""
+
+					if (false) {
+						// bad: 5, 6, 7, 8, 9, 10
+						for (i=1; i<=5; i++){
+							moves += clockData[i][0]
+						}
+						moves += clockData[i-1][1]
+					}
+
+					if (false) {
+						moves += clockData[1][0]
+						moves += clockData[2][0]
+						//moves += clockData[3][0]
+						//moves += clockData[4][0]
+						//moves += clockData[5][0]
+						moves += clockData[2][1]
+						//moves += "BDbDBrFDDflFFLBBlFFLDDRRBBBLRBBlrBLRBBlr RLbbrlbRLbbrlb" //4
+						
+						//moves += "YYXXLLuFFUUDfBBUUrfUURRFRRUUDDFFBDDeSESBmsMsb BSmSMbsesE" // 5
+						//moves += "YYXXLLuFFUUDfBBUUrfUURRFRRUUDDFFBDDeSESBmsMsb" // 5
+						
+						// state now 222222
+						//moves += " EsEESmSSMESS" // from rubik-center-data-2048.js 222222 
+						
+						//moves += "BSmSMbsesE" // 5
+						//moves += cube.reverseMoves( "BSmSMbsesE") // 5
+					}
+
+					if (true) {
+						moves += "BZDDbDz" + "rFDDFRRFFUUBBLLBBUUmEMDDmeMDD"
+						//moves += "B Z D D b D z " + "b D D " + "D D B r F D D F R R F F U U B B L L B B U U m E M D D m e M D D d d m E M d d m e M"
+					}
+					cube.twistQueue.add( moves )
+
+					if (false) {
+						// 9:17pm = 21:17 upside down 1
+						moves = cube.reverseMoves( 'yXLfBBRlDBdfUFFRBBLLFFrUUFFBBUUmEMeBLRBBlrBLRBBlMsmSr RsMSmLbbrlbRLbbrlbEmeM')
+						moves += 'yX'
+						moves += 'LfBBRlDBdfUFFRBBLLFFrUUFFBBUUmEMeBLRBBlrBLRBBlMsmSr'
+						moves += 'RsMSmLbbrlbRLbbrlbEmeM'
+
+						// 9:18pm = 21:18 good 1
+						//moves = cube.reverseMoves( 'yXFFLLDDBBLDDBDFlUFdrfLFULRUUlrULRUUrsMSlEsmSe EsMSeLsmSRuurluRLuurlu')
+						// 9:19pm = 21:19 good 1
+						//moves = cube.reverseMoves( 'yXLLUUBBuLLuRLUFbDBBDDBBRRuBBdRSMsremsES seSMERSmsr')
+						cube.twistQueue.add( moves )
+					}
+
+
+					// down 180
+					//cube.twistQueue.add( 'DRLDDrl DRLDDrl')
+
+				},
+			)
+		},
+		presetCenter180(){
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+			//this.hideLogo()
+			this.showPhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+
+			//this.twistDuration = SECOND / 4
+
+			this.taskQueue.add(
+
+				function() {
+					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
+				},
+				function(){
+					
+					// rotate all center stickers 180 degrees
+					// up 180
+					cube.twistQueue.add( 'URLUUrl  URLUUrl')
+					// left 180
+					cube.twistQueue.add( 'LUDLLud LUDLLud')
+					// front 180
+					cube.twistQueue.add( 'FDUFFdu  FDUFFdu')
+					// right 180
+					cube.twistQueue.add( 'RDURRdu RDURRdu')
+					// back 180
+					cube.twistQueue.add( 'BDUBBdu BDUBBdu')
+					// down 180
+					cube.twistQueue.add( 'DRLDDrl DRLDDrl')
+
+				},
+			)
+
+		},
+		presetCenter90(){
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+			//this.hideLogo()
+			this.showPhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+
+			//this.twistDuration = SECOND / 4
+
+			this.taskQueue.add(
+
+				function() {
+					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
+				},
+				function(){
+					
+					// rotate all center stickers 90 degrees
+
+
+					// left 90 + up 270
+					cube.twistQueue.add( 'm e M U   m E M u' )
+					// up 180 (90 from start)
+					cube.twistQueue.add( 'URLUUrl  URLUUrl')
+
+					// now get front and down
+					// down 90 + front 270
+					cube.twistQueue.add(   'e S E F  e s E f' )
+					// front 180 (90 from start)
+					cube.twistQueue.add( 'FDUFFdu  FDUFFdu')
+
+					// now get right back
+					// right 90 + back 270
+					cube.twistQueue.add(   'M s m B   M S m b' )
+					// back 180 (90 from start)
+					cube.twistQueue.add( 'BDUBBdu BDUBBdu')
+
+				},
+			)
+
 		},
 		presetLogo: function(){
 

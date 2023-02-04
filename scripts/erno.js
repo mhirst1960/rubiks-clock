@@ -207,10 +207,12 @@ var erno = {
 			//  Visualization presets are supplied by the URL hash property.
 			//  Have we been asked to use a visual preset?
 
-			var hash = document.location.search.substr( 1 )
+			//var hash = document.location.search.substr( 1 )
+			var hash = document.location.hash
 
-			if( hash.charAt( hash.length - 1 ) === '/' ) hash = hash.substr( 0, hash.length - 1 )
-			hash = hash.charAt( 0 ).toUpperCase() + hash.substr( 1, hash.length )
+			if( hash.charAt(0) === '#') hash = hash.substring(1, hash.length)
+			if( hash.charAt( hash.length - 1 ) === '/' ) hash = hash.substring( 0, hash.length - 1 )
+			hash = hash.charAt( 0 ).toUpperCase() + hash.substring( 1, hash.length )
 
 
 			//  Create a Rubik's Cube. Just one. 
