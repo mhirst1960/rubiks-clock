@@ -9,6 +9,9 @@ startMinutes = startDate.getMinutes()
 startHours = startDate.getHours()
 startMinutesSinceMidnight = (60 * startHours) + startMinutes
 catchUp = false
+clockType = null
+clockDataPrevious = null
+newClockData = true
 
 clockIsSolved = false
 clockIndex = 1
@@ -68,8 +71,22 @@ solver.logic = function( cube ){
         cube.show()
         cube.hidePlastics()
         cube.hideStickers()
+        //cube.hideLogo()
+        //cube.showPhotos()
+
         cube.hideLogo()
-        cube.showPhotos()
+        cube.hideArrows()
+        cube.hidePhotos()
+
+        if (cube.clockType ==12) {
+            cube.showClock12()
+            cube.hideClock24()
+        } else {
+            cube.hideClock12()
+            cube.showClock24()
+        }
+
+
         cube.hideIds()
         cube.hideIntroverts()
         cube.hideTexts()
@@ -82,7 +99,20 @@ solver.logic = function( cube ){
         cube.showPlastics()
         cube.showStickers()
         //cube.hideLogo()
-        cube.showPhotos()
+        //cube.showPhotos()
+
+        cube.hideLogo()
+        cube.hideArrows()
+        cube.hidePhotos()
+
+        if (cube.clockType ==12) {
+            cube.showClock12()
+            cube.hideClock24()
+        } else {
+            cube.hideClock12()
+            cube.showClock24()
+        }
+
         cube.hideTexts()
         cube.hideWireframes()
         cube.hideIds()
@@ -96,7 +126,23 @@ solver.logic = function( cube ){
     clockIsSolved = false
     // Sticker images (photos) are in media/TMWClock
     // var moves = rubikRobot1Moves
-    var clockData = rubiksClockData
+
+    if (clockType != null && cube.clockType != clockType) {
+        clockDataPrevious = clockData
+        newClockData = true
+    }
+
+    clockType = cube.clockType
+
+    if (cube.clockType == 12) {
+        clockData = rubiksClockData
+    } else {
+        clockData = rubiksClock24Data
+    }
+
+    if (clockDataPrevious == null) {
+        clockDataPrevious = clockData
+    }
 
     if (clockIndex > 60*24) {
         clockIndex -= 60*24
@@ -118,7 +164,7 @@ solver.logic = function( cube ){
     //      if we are behind by just a few minutes.  Just do
     //      it a few times and we wil be caught up
 
-    if (Math.abs(minutesSinceMidnight - clockIndex) > 1) {
+    if (newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 10) {
         catchUp = true
         cube.twistDuration = SECOND / 4
         showCatchup(cube)
@@ -128,13 +174,13 @@ solver.logic = function( cube ){
         showNormal(cube)
     }
 
-    if (catchUp) {
+    if (catchUp || newClockData) {
 
 
         if (clockIndex <= 1) {
             move = ""
         } else {
-            move = clockData[clockIndex-1][1]
+            move = clockDataPrevious[clockIndex-1][1]
         }
         move += reverseMoves(clockData[minutesSinceMidnight][1])
         // TODO fix rotation of centers
@@ -148,6 +194,9 @@ solver.logic = function( cube ){
             clockIndex += 1
         }
     }
+
+    clockDataPrevious = clockData
+    newClockData = false
 
     clockIsSolved = true
 

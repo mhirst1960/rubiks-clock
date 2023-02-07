@@ -322,8 +322,64 @@ table, td, tr {
 
 */
 
+/* TODO should extend one photo cube as baseline for others */
+
 /* Photocube image pieces on each side of a cubelet */
-.photo {
+.classiclogo {
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+.photocube {
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+.arrows {
+
+	display: none;
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+.clock12 {
+
+	display: none;
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+.clock24 {
+
+	display: none;
 
 	position: absolute;
 	margin: 10px 0 0 10px;

@@ -318,115 +318,27 @@ function Cubelet( cube, id, colors ){
 				faceElement.appendChild( stickerElement )
 
 				// put the logo on the white middle sticker
-				if (i==0 && id == 4) {
+				if (false && i==0 && id == 4) {
 					var logoElement = document.createElement( 'div' )
 					logoElement.classList.add( 'stickerLogo' )
 					faceElement.appendChild( logoElement )	
 				}
 
 
-				//  PHOTO.
-				//  6 PNG images. One for each face.
-				//  Split the image into a grid of 9 squares.
-				//  One for each extroverted cublet face.
+				defaultPhotoParams = {'name':'classiclogo', 'folder':'media/default', }
+				photoCubeParams = {'name':'photo', 'folder':'media/photocube', }
+				clock12CubeParams = {'name':'clock12', 'folder':'media/clock12', }
+				//clock12CubeParams = {'name':'photocube', 'folder':'media/clock12', }
 
-				var photoElement = document.createElement( 'div' )
-				photoElement.classList.add( 'photo' )			
-
-				// split the image into 9 sections.
-				// each section is 120x120 pixels with a 20 pixel gap between stickers
-				var p1 = '5px ',
-					p2 = '-120px ',
-					p3 = '-240px '
-
-				if ((i==0 && id == 0)  || // white
-					(i==1 && id == 18) || // orange
-					(i==2 && id == 2)  || // blue
-					(i==3 && id == 6)  || // red
-					(i==4 && id == 18) || // green
-					(i==5 && id == 20))   // yellow
-					{
-						photoElement.style.backgroundPosition = p1 + p1
-					}
-				else if ((i==0 && id == 1)  || // white
-						(i==1 && id == 19) || // orange
-						(i==2 && id == 11)  || // blue
-						(i==3 && id == 7)  || // red
-						(i==4 && id == 9) || // green
-						(i==5 && id == 19))   // yellow
-				{
-					photoElement.style.backgroundPosition = p2 + p1
-				}
-				else if ((i==0 && id == 2)  || // white
-						(i==1 && id == 20) || // orange
-						(i==2 && id == 20)  || // blue
-						(i==3 && id == 8)  || // red
-						(i==4 && id == 0) || // green
-						(i==5 && id == 18))   // yellow
-				{
-					photoElement.style.backgroundPosition = p3+p1
-				}
-				else if ((i==0 && id == 3)  || // white
-						(i==1 && id == 9) || // orange
-						(i==2 && id == 5)  || // blue
-						(i==3 && id == 15)  || // red
-						(i==4 && id == 21) || // green
-						(i==5 && id == 23))   // yellow
-				{
-					photoElement.style.backgroundPosition = p1+p2
-				}				
-				else if ((i==0 && id == 4)  || // white
-						(i==1 && id == 10) || // orange
-						(i==2 && id == 14)  || // blue
-						(i==3 && id == 16)  || // red
-						(i==4 && id == 12) || // green
-						(i==5 && id == 22))   // yellow
-				{
-					photoElement.style.backgroundPosition = p2+p2
-				}				
-				else if ((i==0 && id == 5)  || // white
-						(i==1 && id == 11) || // orange
-						(i==2 && id == 23)  || // blue
-						(i==3 && id == 17)  || // red
-						(i==4 && id == 3) || // green
-						(i==5 && id == 21))   // yellow
-				{
-					photoElement.style.backgroundPosition = p3+p2
-				}				
-
-
-				else if ((i==0 && id == 6)  || // white
-						(i==1 && id == 0) || // orange
-						(i==2 && id == 8)  || // blue
-						(i==3 && id == 24)  || // red
-						(i==4 && id == 24) || // green
-						(i==5 && id == 26))   // yellow
-				{
-					photoElement.style.backgroundPosition = p1+p3
-				}				
-
-				else if ((i==0 && id == 7)  || // white
-						(i==1 && id == 1) || // orange
-						(i==2 && id == 17)  || // blue
-						(i==3 && id == 25)  || // red
-						(i==4 && id == 15) || // green
-						(i==5 && id == 25))   // yellow
-				{
-					photoElement.style.backgroundPosition = p2+p3
-				}				
-
-				else if ((i==0 && id == 8)  || // white
-						(i==1 && id == 2) || // orange
-						(i==2 && id == 26)  || // blue
-						(i==3 && id == 26)  || // red
-						(i==4 && id == 6) || // green
-						(i==5 && id == 24))   // yellow
-				{
-					photoElement.style.backgroundPosition = p3+p3
-				}				
+				clock24CubeParams = {'name':'clock24', 'folder':'media/clock24', }
+				arrowCubeParams = {'name':'arrows', 'folder':'media/arrows', }
+				photoTypes = [defaultPhotoParams]
+				photoTypes = [defaultPhotoParams, clock12CubeParams, clock24CubeParams, arrowCubeParams]
+				//photoTypes = [clock24CubeParams]
 
 				var photoDir = "media/"
 
+				/*
 				var tmwClock = false
 				var robotClock = true
 				var arrows = false
@@ -439,36 +351,146 @@ function Cubelet( cube, id, colors ){
 					else
 						photoDir = photoDir + "RobotClock"
 				}
+				*/
 
-				switch (i) {
-					case 0: // white
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/front.png" )'
-						break
-					case 1: // orange
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/up.png" )'
-						break
-					case 2: // blue
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/right.png" )'
-						stickerElement.classList.add( 'rotate90' )
+				for (key in photoTypes) {
+					//  PHOTO.
+					//  6 PNG images. One for each face.
+					//  Split the image into a grid of 9 squares.
+					//  One for each extroverted cublet face.
 
-						break
-					case 3: // red
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/down.png" )'
-						photoElement.classList.add( 'rotate270' )
-						break
-					case 4: // green
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/left.png" )'
-						photoElement.classList.add( 'rotate90' )
+					photoType = photoTypes[key]
+					if (photoType["name"] == undefined  || photoType["folder"] == undefined) { continue }
+					
+					photoDir = photoType["folder"]
+					var photoElement = document.createElement( 'div' )
+					photoElement.classList.add( photoType["name"] )			
 
-						break
-					case 5: // yellow
-						photoElement.style.backgroundImage =  'url( "' + photoDir + '/back.png" )'
-						photoElement.classList.add( 'rotate90' )
-						break
-					default:
-						// empty
+					// split the image into 9 sections.
+					// each section is 120x120 pixels with a 20 pixel gap between stickers
+					var p1 = '5px ',
+						p2 = '-120px ',
+						p3 = '-240px '
+
+					if ((i==0 && id == 0)  || // white
+						(i==1 && id == 18) || // orange
+						(i==2 && id == 2)  || // blue
+						(i==3 && id == 6)  || // red
+						(i==4 && id == 18) || // green
+						(i==5 && id == 20))   // yellow
+						{
+							photoElement.style.backgroundPosition = p1 + p1
+						}
+					else if ((i==0 && id == 1)  || // white
+							(i==1 && id == 19) || // orange
+							(i==2 && id == 11)  || // blue
+							(i==3 && id == 7)  || // red
+							(i==4 && id == 9) || // green
+							(i==5 && id == 19))   // yellow
+					{
+						photoElement.style.backgroundPosition = p2 + p1
+					}
+					else if ((i==0 && id == 2)  || // white
+							(i==1 && id == 20) || // orange
+							(i==2 && id == 20)  || // blue
+							(i==3 && id == 8)  || // red
+							(i==4 && id == 0) || // green
+							(i==5 && id == 18))   // yellow
+					{
+						photoElement.style.backgroundPosition = p3+p1
+					}
+					else if ((i==0 && id == 3)  || // white
+							(i==1 && id == 9) || // orange
+							(i==2 && id == 5)  || // blue
+							(i==3 && id == 15)  || // red
+							(i==4 && id == 21) || // green
+							(i==5 && id == 23))   // yellow
+					{
+						photoElement.style.backgroundPosition = p1+p2
+					}				
+					else if ((i==0 && id == 4)  || // white
+							(i==1 && id == 10) || // orange
+							(i==2 && id == 14)  || // blue
+							(i==3 && id == 16)  || // red
+							(i==4 && id == 12) || // green
+							(i==5 && id == 22))   // yellow
+					{
+						photoElement.style.backgroundPosition = p2+p2
+					}				
+					else if ((i==0 && id == 5)  || // white
+							(i==1 && id == 11) || // orange
+							(i==2 && id == 23)  || // blue
+							(i==3 && id == 17)  || // red
+							(i==4 && id == 3) || // green
+							(i==5 && id == 21))   // yellow
+					{
+						photoElement.style.backgroundPosition = p3+p2
+					}				
+
+
+					else if ((i==0 && id == 6)  || // white
+							(i==1 && id == 0) || // orange
+							(i==2 && id == 8)  || // blue
+							(i==3 && id == 24)  || // red
+							(i==4 && id == 24) || // green
+							(i==5 && id == 26))   // yellow
+					{
+						photoElement.style.backgroundPosition = p1+p3
+					}				
+
+					else if ((i==0 && id == 7)  || // white
+							(i==1 && id == 1) || // orange
+							(i==2 && id == 17)  || // blue
+							(i==3 && id == 25)  || // red
+							(i==4 && id == 15) || // green
+							(i==5 && id == 25))   // yellow
+					{
+						photoElement.style.backgroundPosition = p2+p3
+					}				
+
+					else if ((i==0 && id == 8)  || // white
+							(i==1 && id == 2) || // orange
+							(i==2 && id == 26)  || // blue
+							(i==3 && id == 26)  || // red
+							(i==4 && id == 6) || // green
+							(i==5 && id == 24))   // yellow
+					{
+						photoElement.style.backgroundPosition = p3+p3
+					}				
+
+
+
+					switch (i) {
+						case 0: // white
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/front.png" )'
+							break
+						case 1: // orange
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/up.png" )'
+							break
+						case 2: // blue
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/right.png" )'
+							stickerElement.classList.add( 'rotate90' )
+
+							break
+						case 3: // red
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/down.png" )'
+							photoElement.classList.add( 'rotate270' )
+							break
+						case 4: // green
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/left.png" )'
+							photoElement.classList.add( 'rotate90' )
+
+							break
+						case 5: // yellow
+							photoElement.style.backgroundImage =  'url( "' + photoDir + '/back.png" )'
+							photoElement.classList.add( 'rotate90' )
+							break
+						default:
+							// empty
+					}
+					faceElement.appendChild( photoElement )
+
 				}
-				faceElement.appendChild( photoElement )
 
 				//  TEXT.
 				//  One character per face, mostly for our branding.
@@ -574,7 +596,13 @@ function Cubelet( cube, id, colors ){
 	this.showIntroverts()
 	this.showStickers()
 	//this.hideLogo() // TODO these are default settings for photo cube, probably shouldn't be default
+
 	this.hidePhotos()
+	this.hideArrows()
+	this.hideClock12()
+	this.hideClock24()
+	this.showLogo()
+	
 	this.hideIds()
 	this.hideTexts()
 	this.hideWireframes()
@@ -1085,39 +1113,93 @@ setupTasks.push( function(){
 		},
 		showLogo: function(){
 
-			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .stickerLogo' ).show()
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .classiclogo' ).show()
 			else this.faces.forEach( function( face ){
 
-				if( face.stickerLogo ) face.stickerLogo.material.opacity = 1
+				if( face.classiclogo ) face.classiclogo.material.opacity = 1
 			})
 			this.showingLogo = true
 		},
 		hideLogo: function(){
 
-			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .stickerLogo' ).hide()
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .classiclogo' ).hide()
 			else this.faces.forEach( function( face ){
 
-				if( face.stickerLogo ) face.stickerLogo.material.opacity = 0
+				if( face.classiclogo ) face.classiclogo.material.opacity = 0
 			})
 			this.showingLogo = false
 		},
 		showPhotos: function(){
 
-			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .photo' ).show()
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .photocube' ).show()
 			else this.faces.forEach( function( face ){
 
-				if( face.photo ) face.photo.material.opacity = 1
+				if( face.photocube ) face.photocube.material.opacity = 1
 			})
 			this.showingPhotos = true
 		},
 		hidePhotos: function(){
 
-			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .photo' ).hide()
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .photocube' ).hide()
 			else this.faces.forEach( function( face ){
 
-				if( face.photo ) face.photo.material.opacity = 0
+				if( face.photocube ) face.photocube.material.opacity = 0
 			})
 			this.showingPhotos = false
+		},
+		showArrows: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .arrows' ).show()
+			else this.faces.forEach( function( face ){
+
+				if( face.photocube ) face.photocube.material.opacity = 1
+			})
+			this.showingArrows = true
+		},
+		hideArrows: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .arrows' ).hide()
+			else this.faces.forEach( function( face ){
+
+				if( face.arrows ) face.arrows.material.opacity = 0
+			})
+			this.showingArrows = false
+		},
+		showClock12: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clock12' ).show()
+			else this.faces.forEach( function( face ){
+
+				if( face.clock12 ) face.clock12.material.opacity = 1
+			})
+			this.showingClock12 = true
+		},
+		hideClock12: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clock12' ).hide()
+			else this.faces.forEach( function( face ){
+
+				if( face.clock12 ) face.clock12.material.opacity = 0
+			})
+			this.showingClock12 = false
+		},
+		showClock24: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clock24' ).show()
+			else this.faces.forEach( function( face ){
+
+				if( face.clock24 ) face.clock24.material.opacity = 1
+			})
+			this.showingClock24 = true
+		},
+		hideClock24: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clock24' ).hide()
+			else this.faces.forEach( function( face ){
+
+				if( face.clock24 ) face.clock24.material.opacity = 0
+			})
+			this.showingClock24 = false
 		},
 		showWireframes: function(){
 

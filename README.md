@@ -1,11 +1,52 @@
-
-
-Cuber  
+Rubik's Clock
 ==============================================================================
 
-Cuber is a Rubik’s Cube simulator.
+Rubiks'c clock presents a webpage of a Rubik's cube that automatically updates every minutes
+showing the current time of day.
+
+![alt Rubik's Clock](media/rubiks-clock-favicon.png "index.html#clock12")
+
+The implementation is based on the javascript/HTML code of Cuber found at https://github.com/stewdio/Cuber-DEMO. Cuber is a Rubik’s Cube simulator.  Rubik's Clock adds the concept of a photo cube to
+Cuber.  The 6 PNG images are carefully crafted with a set of numbers on all sides.  It implements a solver that moves the pieces every minute so the numbers of the current hour and minute show on the front of the cube.
 
 
+## Running Rubik's Clock
+
+### From the desktop
+There are two versions.  A 12-hour clock and a 24-hour clock.  The 12-hour clock rolls over at noon so the next hour is 1:00 (pm).  The 24-hour clock keeps counting up after noon so the next hour is 13:00.
+
+From your Chrome browser (or Safari, or Edge, or a multitude of others) enter your choice:
+
+- `index.html#clock12` for a 12-hour "am/pm" Rubick's clock
+- `index.html#clock24` for a 24-hour "European" or "Military Time" clock
+
+![alt Rubik's 12-hour Clock](media/clock12/clock12Screenshot.png "index.html#clock12")
+![alt Rubik's 24-hour Clock](media/clock24/clock24Screenshot.png "index.html#clock24")
+## Run as a Server
+If you want to share the clock with your friends at home, it is very easy to
+make this webpage available to any computer or smart phone in the house.
+
+Install python3 if you don't already have it.  Then run this command:
+`python3 -m http.server 80`
+
+If you prefer the older python2 you could also do this:
+`python2 -m SimpleHTTPServer 80`
+
+The URL your friends will need is based on your computer name where you ran the previous command.  Often you need to append `.local` to the end of you computer's name to access it.  For instance, if your computer is named `mycomputer` then this is the URL you want to tell your friends to go to:
+
+- `http://mycomputer.local/#clock12`
+- `http://mycomputer.local/#clock24`
+
+I put this on a dedicated Raspberry Pi that is continuously running at my house.  I named my Raspberry Pi `rubiks-clock` and I am an American partial to am/pm.  So this is what I tell my guests to go to from their smart phone:
+
+- `http://rubiks-clock.local/#clock12`
+
+
+Note: when typing in the URL on your browser, be careful which field put it.  don't type it into the Google search bar.  Google will never find it if it is just local inside your house.  Instead make sure to type it into the field for entering webpage URL addresses.  If one box does not work, ty the other.
+
+Also, if you make changes locally, then you may need to clear cache to see the changes on a remote computer.
+
+# History
 **Note: This repository is merely an archive of my original Rubik’s Cube 
 demo, interred here for historical purposes—to document my initial conceptual 
 approach and to exemplify my insane flair for code comments, complete with 
@@ -18,7 +59,58 @@ the branding for the Liberty Science Center
 For more information see [Stewdio](http://stewd.io/w/rubikscube).**
 
 
+============================================================================
+# Raspberry Pi
 
+These are instructions that show how to set this up on a Raspberry Pi with a 4 inch display
+
+## Supplies
+
+You will need:
+
+- Raspberriy Pi 4B
+- 32GB (or larger) micro SDcard
+- Miuzei 4-inch display https://www.amazon.com/dp/B07XBVF1C9?psc=1
+  - https://geekdiywiki.com/4inchscreen
+  - 
+
+Install Raspberry Imager onto your PC (https://www.raspberrypi.com/software/)
+)
+
+Run the Raspberry Pi Imager on your PC
+
+- Insert 32GB SDCard into an sdcard reader and plug into a USB port
+- Operating System: Raspberry Pi OS (32 bit)
+- Storage:
+  - Probably just one option
+  - But it is very important to make sure you a pick the SDCard that you recently inserted
+    - Verify the size matches the size of your SDCard.  E.g. 32 GB
+
+It will take 5-10 minutes or more to write the Raspberry Pi image onto the SDCard.  Be patient.
+- Writing... xx%
+- Verifying... xx%
+
+Insert SDCard into your Rasbberry Pi 4B
+
+The Miuzei display comes with 4 heat sinks. Stick on all of the heat sinks onto the Raspberry Pi board in the correct places.
+
+Connect keyboard, mouse, and HDMI monitor to Raspberry Pi
+Power on
+
+ssh pi@rubiks-clock.local
+
+
+## Installing DIsplay Driver
+The Miuzei 4-inch display requires special driver to run on a Raspberry Pi.
+Download the package from the website and install based on the instructions.
+
+
+============================================================================
+
+
+
+
+# Cuber Notes
 
 Running Cuber
 ------------------------------------------------------------------------------

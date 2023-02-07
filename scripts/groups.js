@@ -349,8 +349,46 @@ setupTasks.push( function(){
 		},
 		hidePhotos: function(){
 			this.cubelets.forEach( function( cubelet ){
-				cubelet.showLogo()
 				cubelet.hidePhotos()
+			})
+			return this
+		},
+		showArrows: function(){
+			this.hideLogo()
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.showArrows()
+			})
+			return this
+		},
+		hideArrows: function(){
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.hideArrows()
+			})
+			return this
+		},
+		showClock12: function(){
+			this.hideLogo()
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.showClock12()
+			})
+			return this
+		},
+		hideClock12: function(){
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.hideClock12()
+			})
+			return this
+		},
+		showClock24: function(){
+			this.hideLogo()
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.showClock24()
+			})
+			return this
+		},
+		hideClock24: function(){
+			this.cubelets.forEach( function( cubelet ){
+				cubelet.hideClock24()
 			})
 			return this
 		},

@@ -1175,8 +1175,11 @@ setupTasks.push( function(){
 			this.showIntroverts()
 			this.showPlastics()
 			this.showStickers()
-			//this.showLogo()
+			this.showLogo()
+			this.hideArrows()
 			this.hidePhotos()
+			this.hideClock12()
+			this.hideClock24()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1197,8 +1200,8 @@ setupTasks.push( function(){
 			//this.showIntroverts()
 			this.hidePlastics()
 			this.hideStickers()
-			//this.hideLogo()
-			//this.showPhotos()
+			this.hideLogo()
+			this.showPhotos()
 			//this.hideTexts()
 			//this.hideWireframes()
 			//this.hideIds()
@@ -1290,9 +1293,9 @@ setupTasks.push( function(){
 			
 			}, 1 )
 		},
-		presetClock: function(){
-
+		clockInit: function(){
 			//$("#favicon").attr("href","media/rubiks-clock-favicon.png")
+			// TODO set title to "Rubik's Clock"
 			$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
 
 			if( erno.state === 'setup' ) {
@@ -1308,7 +1311,55 @@ setupTasks.push( function(){
 			this.showPlastics()
 			this.showStickers()
 			//this.hideLogo()
-			this.showPhotos()
+			//this.showPhotos()
+			this.hideTexts()
+			this.hideWireframes()
+			this.hideIds()
+			this.setOpacity()
+			this.setRadius()
+			updateControls( this )
+		},
+
+		presetClock: function(){
+			this.presetClock12()
+		},
+		presetClock12: function(){
+
+			this.clockType = 12
+
+			//$("#favicon").attr("href","media/rubiks-clock-favicon.png")
+			$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
+
+			this.hideLogo()
+			this.hideArrows()
+			this.hidePhotos()
+			this.showClock12()
+			this.hideClock24()
+
+			updateControls( this )
+
+			if( erno.state === 'setup' ) {
+				this.presetBling()
+			//	this.showPhotos()
+			}
+
+			$( 'body' ).css( 'background-color', '#000' )
+			$( 'body' ).addClass( 'graydient' )
+			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+			//this.show()
+			this.showIntroverts()
+			this.showPlastics()
+			this.showStickers()
+
+			this.hideLogo()
+			this.hideArrows()
+			this.hidePhotos()
+			this.showClock12()
+			this.hideClock24()
+
+
+			//this.hideLogo()
+			//this.showPhotos()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1323,12 +1374,50 @@ setupTasks.push( function(){
 					$( 'body' ).css( 'background-color', '#000' )
 					$( 'body' ).addClass( 'graydient' )
 					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
+					cube.show()
+					cube.showIntroverts()
+					cube.showPlastics()
+					cube.showStickers()
+					//cube.hideLogo()
+					//cube.showPhotos()
+					cube.hideTexts()
+					cube.hideWireframes()
+					cube.hideIds()
+					cube.setOpacity()
+					cube.setRadius()
+					updateControls( cube )
+				},
+				function() {
+					cube.solve()
+				}
+			)
+
+		},
+		presetClock24: function(){
+
+			this.clockType = 24
+
+			this.hideLogo()
+			this.hideArrows()
+			this.hidePhotos()
+			this.hideClock12()
+			this.showClock24()
+
+			this.clockInit()
+
+
+			this.taskQueue.add(
+
+				function() {
+					$( 'body' ).css( 'background-color', '#000' )
+					$( 'body' ).addClass( 'graydient' )
+					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
 					this.show()
 					this.showIntroverts()
 					this.showPlastics()
 					this.showStickers()
 					//this.hideLogo()
-					this.showPhotos()
+					//this.showPhotos()
 					this.hideTexts()
 					this.hideWireframes()
 					this.hideIds()
@@ -1424,100 +1513,6 @@ setupTasks.push( function(){
 
 				},
 			)
-		},
-		presetCenter180(){
-			$( 'body' ).css( 'background-color', '#000' )
-			$( 'body' ).addClass( 'graydient' )
-			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-			this.show()
-			this.showIntroverts()
-			this.showPlastics()
-			this.showStickers()
-			//this.hideLogo()
-			this.showPhotos()
-			this.hideTexts()
-			this.hideWireframes()
-			this.hideIds()
-			this.setOpacity()
-			this.setRadius()
-			updateControls( this )
-
-			//this.twistDuration = SECOND / 4
-
-			this.taskQueue.add(
-
-				function() {
-					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
-				},
-				function(){
-					
-					// rotate all center stickers 180 degrees
-					// up 180
-					cube.twistQueue.add( 'URLUUrl  URLUUrl')
-					// left 180
-					cube.twistQueue.add( 'LUDLLud LUDLLud')
-					// front 180
-					cube.twistQueue.add( 'FDUFFdu  FDUFFdu')
-					// right 180
-					cube.twistQueue.add( 'RDURRdu RDURRdu')
-					// back 180
-					cube.twistQueue.add( 'BDUBBdu BDUBBdu')
-					// down 180
-					cube.twistQueue.add( 'DRLDDrl DRLDDrl')
-
-				},
-			)
-
-		},
-		presetCenter90(){
-			$( 'body' ).css( 'background-color', '#000' )
-			$( 'body' ).addClass( 'graydient' )
-			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-			this.show()
-			this.showIntroverts()
-			this.showPlastics()
-			this.showStickers()
-			//this.hideLogo()
-			this.showPhotos()
-			this.hideTexts()
-			this.hideWireframes()
-			this.hideIds()
-			this.setOpacity()
-			this.setRadius()
-			updateControls( this )
-
-			//this.twistDuration = SECOND / 4
-
-			this.taskQueue.add(
-
-				function() {
-					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
-				},
-				function(){
-					
-					// rotate all center stickers 90 degrees
-
-
-					// left 90 + up 270
-					cube.twistQueue.add( 'm e M U   m E M u' )
-					// up 180 (90 from start)
-					cube.twistQueue.add( 'URLUUrl  URLUUrl')
-
-					// now get front and down
-					// down 90 + front 270
-					cube.twistQueue.add(   'e S E F  e s E f' )
-					// front 180 (90 from start)
-					cube.twistQueue.add( 'FDUFFdu  FDUFFdu')
-
-					// now get right back
-					// right 90 + back 270
-					cube.twistQueue.add(   'M s m B   M S m b' )
-					// back 180 (90 from start)
-					cube.twistQueue.add( 'BDUBBdu BDUBBdu')
-
-				},
-			)
-
 		},
 		presetLogo: function(){
 

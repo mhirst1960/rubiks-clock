@@ -41,6 +41,7 @@
 		<script charset="utf-8" src="scripts/solvers.js"></script>
 		<!--<script charset="utf-8" src="scripts/solvers/stewart.js"></script>		-->
 		<script charset="utf-8" src="scripts/solvers/rubikClockStates.js"></script>
+		<script charset="utf-8" src="scripts/solvers/rubikClockStates24.js"></script>
 		<!--<script charset="utf-8" src="scripts/solvers/rubik-robot1-clock-data.js"></script> -->
 		<script charset="utf-8" src="scripts/solvers/clock.js"></script>		
 		
@@ -111,7 +112,8 @@
 					<a href="javascript:cube.isShuffling=true;cube.isRotating=true;updateControls()">Start shuffle &amp; rotate</a>
 					<a href="javascript:cube.isShuffling=false;cube.isRotating=false;updateControls()">Stop shuffle &amp; rotate</a>
 					<!-- <a href="javascript:cube.solve()">Solve the Top Cross</a> -->
-					<a href="javascript:cube.presetClock(); javascript:cube.solve()">Rubik's Clock</a>
+					<a href="javascript:cube.presetClock12(); javascript:cube.solve()">Rubik's 12-hour Clock</a>
+					<a href="javascript:cube.presetClock24(); javascript:cube.solve()">Rubik's 24-hour Clock</a>
 					<label><input type="checkbox" id="actionShuffle">Shuffle</label>
 					<label><input type="checkbox" id="actionRotate">Auto rotate</label>
 					<label><input type="checkbox" id="actionNotation">Show twist notation</label>
