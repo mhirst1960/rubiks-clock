@@ -1,0 +1,6 @@
+[Desktop Entry] 
+Name=Rubiks Clock
+Exec=/usr/bin/chromium-browser --start-fullscreen --disable-session-crashed-bubble --app='file:///home/pi/rubiks-clock/index.html#clock12'
+Type=application
+Terminal=false
+

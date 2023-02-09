@@ -42,9 +42,29 @@ I put this on a dedicated Raspberry Pi that is continuously running at my house.
 - `http://rubiks-clock.local/#clock12`
 
 
+
 Note: when typing in the URL on your browser, be careful which field put it.  don't type it into the Google search bar.  Google will never find it if it is just local inside your house.  Instead make sure to type it into the field for entering webpage URL addresses.  If one box does not work, ty the other.
 
 Also, if you make changes locally, then you may need to clear cache to see the changes on a remote computer.
+
+# Raspberry Pi 4 inch display
+
+I used these instructions to install the 4 inch display from the commandline from ssh login on the Raspberry Pi:
+
+
+  cd ~/Downloads
+  sudo rm -rf LCD-show
+  git clone https://github.com/goodtft/LCD-show.git
+  chmod -R 755 LCD-show
+  cd LCD-show/
+  sudo ./MPI4008-show
+
+Then from the commandline I run this (and hit F11 to exit full screen mode):
+
+`chromium-browser --start-fullscreen 'file:///home/pi/rubiks-clock/index.html#clock12'`
+
+
+# Origional Documentation
 
 # History
 **Note: This repository is merely an archive of my original Rubik’s Cube 
