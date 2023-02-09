@@ -13,7 +13,7 @@
 		<!-- <link rel="icon" type="image/png" href="media/rubiks-clock-favicon.png">
 		<link rel="apple-touch-icon" href="media/cubiks-clock-favicon.png"> -->
 		
-		<title>Rubik's Clock</title>
+		<title>Cuber</title>
 		
 
 		<!--  Third-party frameworks and scaffolds.  -->
@@ -62,7 +62,7 @@
 		<div id="container"></div>
 		<div id="controlsOpen">
 			<div class="pad">
-				<a href="." onclick="$('#controls').fadeIn( 500 );$('#controlsOpen').fadeOut( 500 );return false">Options</a>
+				<a href="." onclick="$('#controls').fadeIn( 500 );$('#controlsOpen').fadeOut( 500 );return false">Cube Control</a>
 			</div>
 		</div>
 		<div id="controls">
@@ -72,7 +72,6 @@
 
 
 
-<!--
 
 				<div id="presets">
 					<h2>Presets</h2>
@@ -89,44 +88,38 @@
 				</div>
 
 
--->
 
 
-
+				<div id="attributes">
+					<h2>Attributes</h2>				
+					<label><input type="checkbox" id="attributeFaceLabels" checked>Cube face labels</label>
+					<label><input type="checkbox" id="attributePlastics"   checked>Plastic surfaces</label>
+					<label><input type="checkbox" id="attributeIntroverts" checked>Introvert surfaces</label>
+					<label><input type="checkbox" id="attributeStickers"   checked>Color stickers</label>
+					<label><input type="checkbox" id="attributePhotos"     checked>Photo Cube</label>
+					<label><input type="checkbox" id="attributeIds"        checked>Cubelet Ids</label>
+					<label><input type="checkbox" id="attributeTexts"      checked>Texts</label>
+					<label><input type="checkbox" id="attributeWireframes" checked>Wireframes</label>
+				</div>
 
 
 
 
 				<div id="actions">
-					<h2>Options</h2>
-					<!--
-
+					<h2>Actions</h2>
 					<a href="javascript:cube.presetDemo()">Start demo mode</a>
 					<a href="javascript:cube.presetDemoStop()">Stop demo mode</a>
 					<a href="javascript:cube.isShuffling=true;cube.isRotating=true;updateControls()">Start shuffle &amp; rotate</a>
 					<a href="javascript:cube.isShuffling=false;cube.isRotating=false;updateControls()">Stop shuffle &amp; rotate</a>
-					<a href="javascript:cube.solve()">Solve the Top Cross</a>	
-					-->
+					<!-- <a href="javascript:cube.solve()">Solve the Top Cross</a> -->
 					<a href="javascript:cube.presetClock12(); javascript:cube.solve()">Rubik's 12-hour Clock</a>
 					<a href="javascript:cube.presetClock24(); javascript:cube.solve()">Rubik's 24-hour Clock</a>
-					<!--<label><input type="checkbox" id="actionShuffle">Shuffle</label>-->
+					<label><input type="checkbox" id="actionShuffle">Shuffle</label>
 					<label><input type="checkbox" id="actionRotate">Auto rotate</label>
-					<!--<label><input type="checkbox" id="actionNotation">Show twist notation</label>-->
+					<label><input type="checkbox" id="actionNotation">Show twist notation</label>
 				</div>
 
-				<div id="attributes">
-					<h2>Attributes</h2>
-					<!---->
-					<label><input type="checkbox" id="attributeFaceLabels" checked>Cube face labels</label>
-					<label><input type="checkbox" id="attributePlastics"   checked>Plastic surfaces</label>
-					<label><input type="checkbox" id="attributeIntroverts" checked>Introvert surfaces</label>
-					<label><input type="checkbox" id="attributeStickers"   checked>Color stickers</label>
-					<!-- <label><input type="checkbox" id="attributePhotos"     checked>Photo Cube</label> -->
-					<label><input type="checkbox" id="attributeIds"        checked>Cubelet Ids</label>
-					<label><input type="checkbox" id="attributeTexts"      checked>Texts</label>
-					<label><input type="checkbox" id="attributeWireframes" checked>Wireframes</label>
-				</div>
-<!--
+
 
 
 				<div id="commands">
@@ -157,7 +150,6 @@
 					Hit return to or click elsewhere to apply changes.
 				</div>
 				<br><br>
--->
 
 				
 

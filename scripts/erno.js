@@ -94,7 +94,7 @@ var erno = {
 	//  How much output do we want in the browser's console?
 	//  0 = None. 1 = Everything.
 
-	verbosity: 0.5,
+	verbosity: 0.9, //0.5,
 
 
 	//  We're using Three.js for sure, 
@@ -207,10 +207,12 @@ var erno = {
 			//  Visualization presets are supplied by the URL hash property.
 			//  Have we been asked to use a visual preset?
 
-			var hash = document.location.search.substr( 1 )
+			//var hash = document.location.search.substr( 1 )
+			var hash = document.location.hash
 
-			if( hash.charAt( hash.length - 1 ) === '/' ) hash = hash.substr( 0, hash.length - 1 )
-			hash = hash.charAt( 0 ).toUpperCase() + hash.substr( 1, hash.length )
+			if( hash.charAt(0) === '#') hash = hash.substring(1, hash.length)
+			if( hash.charAt( hash.length - 1 ) === '/' ) hash = hash.substring( 0, hash.length - 1 )
+			hash = hash.charAt( 0 ).toUpperCase() + hash.substring( 1, hash.length )
 
 
 			//  Create a Rubik's Cube. Just one. 
@@ -475,7 +477,16 @@ function applyControls(){
 		if( $( '#attributeStickers' ).prop( 'checked' )) cube.showStickers()
 		else cube.hideStickers()
 	}
-	if( $( '#attributeIds' ).prop( 'indeterminate' ) !== true ){
+	//if( $( '#attributeLogo' ).prop( 'indeterminate' ) !== true ){
+
+	//	if( $( '#attributeLogo' ).prop( 'checked' )) cube.showLogo()
+	//	else cube.hideLogo()
+	//}
+	if( $( '#attributePhotos' ).prop( 'indeterminate' ) !== true ){
+
+		if( $( '#attributePhotos' ).prop( 'checked' )) cube.showPhotos()
+		else cube.hidePhotos()
+	}	if( $( '#attributeIds' ).prop( 'indeterminate' ) !== true ){
 
 		if( $( '#attributeIds' ).prop( 'checked' )) cube.showIds()
 		else cube.hideIds()
@@ -507,6 +518,8 @@ function updateControls( cube ){
 	plastics   = 0,
 	introverts = 0,
 	stickers   = 0,
+	//logo       = 0,
+	photos     = 0,
 	ids        = 0,
 	texts      = 0,
 	wireframes = 0
@@ -516,6 +529,8 @@ function updateControls( cube ){
 		if( cubelet.showingPlastics   ) plastics ++
 		if( cubelet.showingIntroverts ) introverts ++
 		if( cubelet.showingStickers   ) stickers ++
+		//if( cubelet.showingLogo       ) logo = 27 // There is only one logo fake !indeterminate
+		if( cubelet.showingPhotos     ) photos ++
 		if( cubelet.showingIds        ) ids ++
 		if( cubelet.showingTexts      ) texts ++
 		if( cubelet.showingWireframes ) wireframes ++
@@ -526,6 +541,8 @@ function updateControls( cube ){
 		console.log( '  plastics .....', plastics )
 		console.log( '  introverts ...', introverts )
 		console.log( '  stickers .....', stickers )
+		//console.log( '  logo .........', logo )
+		console.log( '  photos .......', photos )
 		console.log( '  ids ..........', ids )
 		console.log( '  texts ........', texts )
 		console.log( '  wireframes ...', wireframes )
@@ -535,6 +552,8 @@ function updateControls( cube ){
 	assessTrueFalseMixed( '#attributePlastics',   plastics )
 	assessTrueFalseMixed( '#attributeIntroverts', introverts )
 	assessTrueFalseMixed( '#attributeStickers',   stickers )
+	//assessTrueFalseMixed( '#attributeLogo',       logo )
+	assessTrueFalseMixed( '#attributePhotos',     photos )
 	assessTrueFalseMixed( '#attributeIds',        ids )
 	assessTrueFalseMixed( '#attributeTexts',      texts )
 	assessTrueFalseMixed( '#attributeWireframes', wireframes )

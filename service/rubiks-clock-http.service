@@ -1,0 +1,10 @@
+ [Unit]
+ Description=Rubiks Clock HTTP Server
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python3 -m http.server 80 --directory /home/pi/rubiks-clock
+
+ [Install]
+ WantedBy=multi-user.target
