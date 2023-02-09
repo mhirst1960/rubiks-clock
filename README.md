@@ -4,7 +4,7 @@ Rubik's Clock
 Rubiks'c clock presents a webpage of a Rubik's cube that automatically updates every minutes
 showing the current time of day.
 
-![alt Rubik's Clock](media/rubiks-clock-favicon.png "index.html#clock12")
+![alt Rubik's Clock](media/rubiks-clock-favicon.png "index.html")
 
 The implementation is based on the javascript/HTML code of Cuber found at https://github.com/stewdio/Cuber-DEMO. Cuber is a Rubik’s Cube simulator.  Rubik's Clock adds the concept of a photo cube to
 Cuber.  The 6 PNG images are carefully crafted with a set of numbers on all sides.  It implements a solver that moves the pieces every minute so the numbers of the current hour and minute show on the front of the cube.
@@ -17,6 +17,7 @@ There are two versions.  A 12-hour clock and a 24-hour clock.  The 12-hour clock
 
 From your Chrome browser (or Safari, or Edge, or a multitude of others) enter your choice:
 
+- `index.html` for a 12-hour "am/pm" Rubick's clock (default)
 - `index.html#clock12` for a 12-hour "am/pm" Rubick's clock
 - `index.html#clock24` for a 24-hour "European" or "Military Time" clock
 
@@ -34,12 +35,13 @@ If you prefer the older python2 you could also do this:
 
 The URL your friends will need is based on your computer name where you ran the previous command.  Often you need to append `.local` to the end of you computer's name to access it.  For instance, if your computer is named `mycomputer` then this is the URL you want to tell your friends to go to:
 
+- `http://mycomputer.local`
 - `http://mycomputer.local/#clock12`
 - `http://mycomputer.local/#clock24`
 
-I put this on a dedicated Raspberry Pi that is continuously running at my house.  I named my Raspberry Pi `rubiks-clock` and I am an American partial to am/pm.  So this is what I tell my guests to go to from their smart phone:
+I put this on a dedicated Raspberry Pi that is continuously running at my house.  I named my Raspberry Pi `rubiks-clock`.  So this is what I tell my guests to go to from their smart phone:
 
-- `http://rubiks-clock.local/#clock12`
+- `http://rubiks-clock.local`
 
 
 
@@ -47,7 +49,9 @@ Note: when typing in the URL on your browser, be careful which field put it.  do
 
 Also, if you make changes locally, then you may need to clear cache to see the changes on a remote computer.
 
-# Raspberry Pi 4 inch display
+# Raspberry Pi Installation
+
+## Raspberry Pi 4 inch display
 
 I used these instructions to install the 4 inch display from the commandline from ssh login on the Raspberry Pi:
 
@@ -61,22 +65,29 @@ I used these instructions to install the 4 inch display from the commandline fro
 
 Then from the commandline I run this (and hit F11 to exit full screen mode):
 
-`chromium-browser --start-fullscreen 'file:///home/pi/rubiks-clock/index.html#clock12'`
+`/usr/bin/chromium-browser --start-fullscreen --app='file:///home/pi/rubiks-clock/index.html#clock12'`
 
 
-# Origional Documentation
+## Install
+If you put the top directory rubiks-clock directly under /home/pi, you can run this command to install so it will automatically start every time you plug in your Raspberry.
 
-# History
-**Note: This repository is merely an archive of my original Rubik’s Cube 
-demo, interred here for historical purposes—to document my initial conceptual 
-approach and to exemplify my insane flair for code comments, complete with 
-ASCII art illustrations. Cuber went on to power the 
-[Rubik’s Cube Google Doodle](https://www.google.com/doodles/rubiks-cube),
-the [Chrome Cube Lab](https://chrome.com/cubelab) experiments, and my own 
-[Rubik’s Cube Explorer](http://iamthecu.be). It was also used to create
-the branding for the Liberty Science Center 
-[Beyond Rubik’s Cube exhibition](http://brc.lsc.org). 
-For more information see [Stewdio](http://stewd.io/w/rubikscube).**
+  `/home/pi/service/install.sh`
+
+- It installs the http server as a service so other computers can run the by webpage remotely.
+- It starts the Chrome browser automatically in full screen mode showing the clock.
+
+#### Hide the Cursor
+If you would like to hide the mouse cursor run this command:
+
+  `echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel`
+
+### Uninstall
+To undo these changes, you can run these command:
+
+   `/home/pi/service/uninstall.sh`
+
+  `rm /home/pi/.config/lxpanel/LXDE-pi/panels/panel`
+
 
 
 ============================================================================
@@ -127,6 +138,20 @@ Download the package from the website and install based on the instructions.
 
 ============================================================================
 
+==================================================
+# Original CuberDemo Documentation
+
+# History
+**Note: This repository is merely an archive of my original Rubik’s Cube 
+demo, interred here for historical purposes—to document my initial conceptual 
+approach and to exemplify my insane flair for code comments, complete with 
+ASCII art illustrations. Cuber went on to power the 
+[Rubik’s Cube Google Doodle](https://www.google.com/doodles/rubiks-cube),
+the [Chrome Cube Lab](https://chrome.com/cubelab) experiments, and my own 
+[Rubik’s Cube Explorer](http://iamthecu.be). It was also used to create
+the branding for the Liberty Science Center 
+[Beyond Rubik’s Cube exhibition](http://brc.lsc.org). 
+For more information see [Stewdio](http://stewd.io/w/rubikscube).**
 
 
 

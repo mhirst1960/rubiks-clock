@@ -242,7 +242,8 @@ function Cube( preset ){
 	//  Shall we load some presets here?
 
 	preset = 'preset' + preset.capitalize()
-	if( this[ preset ] instanceof Function === false ) preset = 'presetBling'
+	//if( this[ preset ] instanceof Function === false ) preset = 'presetBling'
+	if( this[ preset ] instanceof Function === false ) preset = 'presetClock'
 	this[ preset ]()
 
 
