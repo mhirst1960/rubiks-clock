@@ -325,16 +325,15 @@ function Cubelet( cube, id, colors ){
 				}
 
 
+				// We have a bunch of options to show different images on a cube
 				defaultPhotoParams = {'name':'classiclogo', 'folder':'media/default', }
 				photoCubeParams = {'name':'photo', 'folder':'media/photocube', }
+				clockLogoParams = {'name':'clocklogo', 'folder':'media/clocklogo', }
 				clock12CubeParams = {'name':'clock12', 'folder':'media/clock12', }
-				//clock12CubeParams = {'name':'photocube', 'folder':'media/clock12', }
-
 				clock24CubeParams = {'name':'clock24', 'folder':'media/clock24', }
 				arrowCubeParams = {'name':'arrows', 'folder':'media/arrows', }
-				photoTypes = [defaultPhotoParams]
-				photoTypes = [defaultPhotoParams, clock12CubeParams, clock24CubeParams, arrowCubeParams]
-				//photoTypes = [clock24CubeParams]
+
+				photoTypes = [defaultPhotoParams, clock12CubeParams, clock24CubeParams, clockLogoParams, arrowCubeParams]
 
 				var photoDir = "media/"
 
@@ -601,7 +600,8 @@ function Cubelet( cube, id, colors ){
 	this.hideArrows()
 	this.hideClock12()
 	this.hideClock24()
-	this.showLogo()
+	this.showClockLogo()
+	this.hideLogo()
 	
 	this.hideIds()
 	this.hideTexts()
@@ -1128,6 +1128,24 @@ setupTasks.push( function(){
 				if( face.classiclogo ) face.classiclogo.material.opacity = 0
 			})
 			this.showingLogo = false
+		},
+		showClockLogo: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clocklogo' ).show()
+			else this.faces.forEach( function( face ){
+
+				if( face.clocklogo ) face.clocklogo.material.opacity = 1
+			})
+			this.showingClockLogo = true
+		},
+		hideClockLogo: function(){
+
+			if( erno.renderMode === 'css' ) $( '.cubeletId-'+ this.id + ' .clocklogo' ).hide()
+			else this.faces.forEach( function( face ){
+
+				if( face.clocklogo ) face.clocklogo.material.opacity = 0
+			})
+			this.showingClockLogo = false
 		},
 		showPhotos: function(){
 

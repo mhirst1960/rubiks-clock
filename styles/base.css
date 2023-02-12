@@ -322,10 +322,16 @@ table, td, tr {
 
 */
 
-/* TODO should extend one photo cube as baseline for others */
+/* TODO should extend one photo cube as baseline for others.
+        There is a lot of duplicated code here.
+ */
 
 /* Photocube image pieces on each side of a cubelet */
 .classiclogo {
+
+
+	/* Comment this out to get the real classic image by default */
+	display: none;
 
 	position: absolute;
 	margin: 10px 0 0 10px;
@@ -352,6 +358,21 @@ table, td, tr {
 .arrows {
 
 	display: none;
+
+	position: absolute;
+	margin: 10px 0 0 10px;
+	width:  120px;
+	height: 120px;
+	border-radius: 12px;
+	text-align: center;
+	background-size: 360px 360px;
+	background-repeat: none;
+}
+
+.clocklogo {
+
+	/* Uncomment this to hide the mock-classic decal on white */
+	/*	display: none; */
 
 	position: absolute;
 	margin: 10px 0 0 10px;

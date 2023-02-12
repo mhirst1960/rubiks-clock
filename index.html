@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<meta name="description" content="Rubik’s Cube">
-		<meta name="keywords" content="Erno Rubik’s Cube">
+		<meta name="description" content="Rubik’s Clock">
+		<meta name="keywords" content="Erno Rubik’s Cube Clock">
 		
 		<link rel="stylesheet" type="text/css" href="styles/base.css">
 		<link rel="icon" type="image/png" href="media/cuber-favicon-0064x0064.png">
@@ -109,6 +109,10 @@
 					-->
 					<a href="javascript:cube.presetClock12(); javascript:cube.solve()">Rubik's 12-hour Clock</a>
 					<a href="javascript:cube.presetClock24(); javascript:cube.solve()">Rubik's 24-hour Clock</a>
+					<a href="javascript:cube.presetBiglock12(); javascript:cube.solve()">Rubik's 12-hour Clock (large)</a>
+					<a href="javascript:cube.presetBigclock24(); javascript:cube.solve()">Rubik's 24-hour Clock (large)</a>
+					<a href="javascript:cube.presetGiantclock12(); javascript:cube.solve()">Rubik's 12-hour Clock (Giant)</a>
+					<a href="javascript:cube.presetGiantclock24(); javascript:cube.solve()">Rubik's 24-hour Clock (Giant)</a>
 					<!--<label><input type="checkbox" id="actionShuffle">Shuffle</label>-->
 					<label><input type="checkbox" id="actionRotate">Auto rotate</label>
 					<!--<label><input type="checkbox" id="actionNotation">Show twist notation</label>-->
@@ -116,15 +120,19 @@
 
 				<div id="attributes">
 					<h2>Attributes</h2>
-					<!---->
+					<!-- TODO: remove these items but need to still set as enabled -->
 					<label><input type="checkbox" id="attributeFaceLabels" checked>Cube face labels</label>
-					<label><input type="checkbox" id="attributePlastics"   checked>Plastic surfaces</label>
+						<label><input type="checkbox" id="attributePlastics"   checked>Plastic surfaces</label>
 					<label><input type="checkbox" id="attributeIntroverts" checked>Introvert surfaces</label>
 					<label><input type="checkbox" id="attributeStickers"   checked>Color stickers</label>
 					<!-- <label><input type="checkbox" id="attributePhotos"     checked>Photo Cube</label> -->
 					<label><input type="checkbox" id="attributeIds"        checked>Cubelet Ids</label>
+					<!--
+
 					<label><input type="checkbox" id="attributeTexts"      checked>Texts</label>
 					<label><input type="checkbox" id="attributeWireframes" checked>Wireframes</label>
+											
+					-->
 				</div>
 <!--
 
