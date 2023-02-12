@@ -123,6 +123,8 @@ function Cube( preset ){
 
 
 	// The smaller the zoom value the bigger the cube will appear
+	this.zoomSizeTiny = 6000
+	this.zoomSizeSmall = 3000
 	this.zoomSizeDefault = 1500
 	this.zoomSizeBig = 1200
 	this.zoomSizeGiant = 900
@@ -1169,7 +1171,6 @@ setupTasks.push( function(){
 					.onComplete( function(){
 
 						cubelet.isTweening = false
-						//cubelet.hidePhotos() // photocube disappears piece by piece
 
 					})
 					.start()
@@ -1324,9 +1325,6 @@ setupTasks.push( function(){
 			this.showIntroverts()
 			this.showPlastics()
 			this.showStickers()
-			//this.hideLogo()
-			//this.showPhotos()
-			//this.hideClockLogo()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1335,7 +1333,26 @@ setupTasks.push( function(){
 			updateControls( this )
 		},
 
-
+		presetZoomTiny(){
+			this.zoom = this.zoomSizeTiny
+			setCameraZoom(this.zoom)
+		},
+		presetZoomSmall(){
+			this.zoom = this.zoomSizeSmall
+			setCameraZoom(this.zoom)
+		},
+		presetZoomDefault(){
+			this.zoom = this.zoomSizeDefault
+			setCameraZoom(this.zoom)
+		},
+		presetZoomBig(){
+			this.zoom = this.zoomSizeBig
+			setCameraZoom(this.zoom)
+		},
+		presetZoomGiant(){
+			this.zoom = this.zoomSizeGiant
+			setCameraZoom(this.zoom)
+		},
 		presetClock: function(){
 			if (this.defaultClockIs24) {
 				this.presetClock24()
@@ -1418,25 +1435,6 @@ setupTasks.push( function(){
 
 
 			this.taskQueue.add(
-
-				/*
-				function() {
-					$( 'body' ).css( 'background-color', '#000' )
-					$( 'body' ).addClass( 'graydient' )
-					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-					cube.show()
-					cube.showIntroverts()
-					cube.showPlastics()
-					cube.showStickers()
-
-					cube.hideTexts()
-					cube.hideWireframes()
-					cube.hideIds()
-					cube.setOpacity()
-					cube.setRadius()
-					updateControls( cube )
-				},
-				*/
 				function() {
 					cube.solve()
 				}
@@ -1471,25 +1469,7 @@ setupTasks.push( function(){
 
 
 			this.taskQueue.add(
-/*
-				function() {
-					$( 'body' ).css( 'background-color', '#000' )
-					$( 'body' ).addClass( 'graydient' )
-					setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-					this.show()
-					this.showIntroverts()
-					this.showPlastics()
-					this.showStickers()
-					//this.hideLogo()
-					//this.showPhotos()
-					this.hideTexts()
-					this.hideWireframes()
-					this.hideIds()
-					this.setOpacity()
-					this.setRadius()
-					updateControls( this )
-				},
-				*/
+
 				function() {
 					cube.solve()
 				}
@@ -1525,53 +1505,10 @@ setupTasks.push( function(){
 					var clockData = rubiksClockData
 					moves = ""
 
-					if (false) {
-						// bad: 5, 6, 7, 8, 9, 10
-						for (i=1; i<=5; i++){
-							moves += clockData[i][0]
-						}
-						moves += clockData[i-1][1]
-					}
-
-					if (false) {
-						moves += clockData[1][0]
-						moves += clockData[2][0]
-						//moves += clockData[3][0]
-						//moves += clockData[4][0]
-						//moves += clockData[5][0]
-						moves += clockData[2][1]
-						//moves += "BDbDBrFDDflFFLBBlFFLDDRRBBBLRBBlrBLRBBlr RLbbrlbRLbbrlb" //4
-						
-						//moves += "YYXXLLuFFUUDfBBUUrfUURRFRRUUDDFFBDDeSESBmsMsb BSmSMbsesE" // 5
-						//moves += "YYXXLLuFFUUDfBBUUrfUURRFRRUUDDFFBDDeSESBmsMsb" // 5
-						
-						// state now 222222
-						//moves += " EsEESmSSMESS" // from rubik-center-data-2048.js 222222 
-						
-						//moves += "BSmSMbsesE" // 5
-						//moves += cube.reverseMoves( "BSmSMbsesE") // 5
-					}
-
-					if (true) {
-						moves += "BZDDbDz" + "rFDDFRRFFUUBBLLBBUUmEMDDmeMDD"
-						//moves += "B Z D D b D z " + "b D D " + "D D B r F D D F R R F F U U B B L L B B U U m E M D D m e M D D d d m E M d d m e M"
-					}
+	
+					moves += "BZDDbDz" + "rFDDFRRFFUUBBLLBBUUmEMDDmeMDD"
+					//moves += "B Z D D b D z " + "b D D " + "D D B r F D D F R R F F U U B B L L B B U U m E M D D m e M D D d d m E M d d m e M"
 					cube.twistQueue.add( moves )
-
-					if (false) {
-						// 9:17pm = 21:17 upside down 1
-						moves = cube.reverseMoves( 'yXLfBBRlDBdfUFFRBBLLFFrUUFFBBUUmEMeBLRBBlrBLRBBlMsmSr RsMSmLbbrlbRLbbrlbEmeM')
-						moves += 'yX'
-						moves += 'LfBBRlDBdfUFFRBBLLFFrUUFFBBUUmEMeBLRBBlrBLRBBlMsmSr'
-						moves += 'RsMSmLbbrlbRLbbrlbEmeM'
-
-						// 9:18pm = 21:18 good 1
-						//moves = cube.reverseMoves( 'yXFFLLDDBBLDDBDFlUFdrfLFULRUUlrULRUUrsMSlEsmSe EsMSeLsmSRuurluRLuurlu')
-						// 9:19pm = 21:19 good 1
-						//moves = cube.reverseMoves( 'yXLLUUBBuLLuRLUFbDBBDDBBRRuBBdRSMsremsES seSMERSmsr')
-						cube.twistQueue.add( moves )
-					}
-
 
 					// down 180
 					//cube.twistQueue.add( 'DRLDDrl DRLDDrl')

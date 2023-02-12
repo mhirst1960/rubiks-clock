@@ -91,6 +91,10 @@ Fold.prototype.setText = function( text ){
 
 	var i
 
+	if (typeof text === 'undefined') {
+	    return
+	}
+	
 	text = text.justifyLeft( 18 )
 	for( i = 0; i < 18; i ++ ){
 

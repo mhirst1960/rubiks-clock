@@ -396,16 +396,14 @@ function setupControls(){
 }
 function setCameraZoom(zPosition){
 	camera.position.z = zPosition
-	//camera.rotation.z = 1000
+	camera.updateProjectionMatrix()
+
 	render()
 }
 function setCameraXY(xPosition, yPosition){
 	camera.position.x = xPosition
 	camera.position.y = yPosition
-	//camera.translateX(xPosition)
-	//camera.translatY(yPosition)
 	camera.updateProjectionMatrix()
-	//updateControls()	
 	render()
 }
 function onWindowResize(){
