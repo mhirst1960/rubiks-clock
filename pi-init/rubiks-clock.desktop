@@ -1,0 +1,10 @@
+[Desktop Entry] 
+Name=Rubiks Clock
+
+# Uncomment one of these lines depending on if you want a 12-hour clock or a 24-hour clock
+Exec=/usr/bin/chromium-browser --start-fullscreen --disable-session-crashed-bubble --app='file:///home/pi/rubiks-clock/index.html#giantclock12'
+#Exec=/usr/bin/chromium-browser --start-fullscreen --disable-session-crashed-bubble --app='file:///home/pi/rubiks-clock/index.html#giantclock24'
+
+Type=application
+Terminal=false
+

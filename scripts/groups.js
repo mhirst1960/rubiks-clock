@@ -339,10 +339,20 @@ setupTasks.push( function(){
 			this.cubelets.forEach( function( cubelet ){ cubelet.hideLogo() })
 			return this
 		},
+		showClockLogo: function(){
+			// Technically this only affects one cubelet but we can do them all.  It doesn't hurt.
+			this.cubelets.forEach( function( cubelet ){ cubelet.showClockLogo() })
+			return this
+		},
+		hideClockLogo: function(){
+
+			this.cubelets.forEach( function( cubelet ){ cubelet.hideClockLogo() })
+			return this
+		},
 		showPhotos: function(){
 			this.cubelets.forEach( function( cubelet ){
-				// If someone wants the logo on a photocube it can be incorporated into front photo
 				cubelet.hideLogo()
+				cubelet.hideClockLogo()
 				cubelet.showPhotos()
 			})
 			return this
@@ -355,6 +365,7 @@ setupTasks.push( function(){
 		},
 		showArrows: function(){
 			this.hideLogo()
+			this.hideClockLogo()
 			this.cubelets.forEach( function( cubelet ){
 				cubelet.showArrows()
 			})
@@ -368,6 +379,7 @@ setupTasks.push( function(){
 		},
 		showClock12: function(){
 			this.hideLogo()
+			this.hideClockLogo()
 			this.cubelets.forEach( function( cubelet ){
 				cubelet.showClock12()
 			})
@@ -381,6 +393,7 @@ setupTasks.push( function(){
 		},
 		showClock24: function(){
 			this.hideLogo()
+			this.hideClockLogo()
 			this.cubelets.forEach( function( cubelet ){
 				cubelet.showClock24()
 			})

@@ -89,6 +89,8 @@ function Cube( preset ){
 	var cube = this
 
 
+	let hostname = location.hostname;
+
 	//  Some important booleans.
 
 	this.isReady     = true
@@ -119,12 +121,18 @@ function Cube( preset ){
 	this.shuffleMethod = this.PRESERVE_LOGO
 
 
-	//  Size matters? Cubelets will attempt to read these values.
 
+	// The smaller the zoom value the bigger the cube will appear
+	this.zoomSizeDefault = 1500
+	this.zoomSizeBig = 1200
+	this.zoomSizeGiant = 900
+
+	this.defaultClockIs24 = false  // set to true if you want 24-hour clock as default preset
+
+	//  Size matters? Cubelets will attempt to read these values.
 	this.size = 420
 	this.cubeletSize = 140
-
-
+	this.zoom = this.zoomSizeDefault
 
 
 	//  We need to create and setup a new CSS3 Object
@@ -1088,6 +1096,9 @@ setupTasks.push( function(){
 
 			var cube = this
 			
+			xAngle = this.rotationAngleX || 25
+			yAngle = this.rotationAngleY || -30
+
 			this.threeObject.position.y = -2000
 			new TWEEN.Tween( this.threeObject.position )
 				.to({ 
@@ -1104,8 +1115,8 @@ setupTasks.push( function(){
 			new TWEEN.Tween( this.threeObject.rotation )
 				.to({ 
 
-					x: (  25 ).degreesToRadians(), 
-					y: ( -30 ).degreesToRadians(),
+					x: (  xAngle ).degreesToRadians(), 
+					y: (  yAngle ).degreesToRadians(),
 					z: 0
 
 				}, SECOND * 3 )
@@ -1158,7 +1169,7 @@ setupTasks.push( function(){
 					.onComplete( function(){
 
 						cubelet.isTweening = false
-						cubelet.hidePhotos() // photocube disappears piece by piece
+						//cubelet.hidePhotos() // photocube disappears piece by piece
 
 					})
 					.start()
@@ -1202,6 +1213,7 @@ setupTasks.push( function(){
 			this.hidePlastics()
 			this.hideStickers()
 			this.hideLogo()
+			this.hideClockLogo()
 			this.showPhotos()
 			//this.hideTexts()
 			//this.hideWireframes()
@@ -1254,6 +1266,7 @@ setupTasks.push( function(){
 					this.showPlastics()
 					this.showStickers()
 					this.hideLogo()
+					this.hideClockLogo()
 					this.showPhotos()
 					this.hideTexts()
 					this.hideWireframes()
@@ -1313,6 +1326,7 @@ setupTasks.push( function(){
 			this.showStickers()
 			//this.hideLogo()
 			//this.showPhotos()
+			//this.hideClockLogo()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1321,21 +1335,57 @@ setupTasks.push( function(){
 			updateControls( this )
 		},
 
+
 		presetClock: function(){
+			if (this.defaultClockIs24) {
+				this.presetClock24()
+			} else {
+				this.presetClock12()
+			}
+		},
+		presetBigclock: function(){
+			if (this.defaultClockIs24) {
+				this.presetBigclock24()
+			} else {
+				this.presetBigclock12()
+			}
+		},
+		presetGiantclock: function(){
+			if (this.defaultClockIs24) {
+				this.presetGiantclock24()
+			} else {
+				this.presetGiantclock12()
+			}
+		},
+		presetBigclock12: function(){
+			this.zoom = this.zoomSizeBig
+			this.presetClock12()
+		},
+		presetGiantclock12: function(){
+			this.zoom = this.zoomSizeGiant
+			
+			// It will fit on thee screen better if not rotated so mush
+			this.rotationAngleX = 15
+			this.rotationAngleY = -15
+
 			this.presetClock12()
 		},
 		presetClock12: function(){
 
 			this.clockType = 12
 
-			//$("#favicon").attr("href","media/rubiks-clock-favicon.png")
-			$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
+			setCameraZoom(this.zoom)
+
+			//$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
 
 			this.hideLogo()
+			this.hideClockLogo()
 			this.hideArrows()
 			this.hidePhotos()
 			this.showClock12()
 			this.hideClock24()
+
+			this.clockInit()
 
 			updateControls( this )
 
@@ -1353,14 +1403,12 @@ setupTasks.push( function(){
 			this.showStickers()
 
 			this.hideLogo()
+			this.hideClockLogo()
 			this.hideArrows()
 			this.hidePhotos()
 			this.showClock12()
 			this.hideClock24()
 
-
-			//this.hideLogo()
-			//this.showPhotos()
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1371,6 +1419,7 @@ setupTasks.push( function(){
 
 			this.taskQueue.add(
 
+				/*
 				function() {
 					$( 'body' ).css( 'background-color', '#000' )
 					$( 'body' ).addClass( 'graydient' )
@@ -1379,8 +1428,7 @@ setupTasks.push( function(){
 					cube.showIntroverts()
 					cube.showPlastics()
 					cube.showStickers()
-					//cube.hideLogo()
-					//cube.showPhotos()
+
 					cube.hideTexts()
 					cube.hideWireframes()
 					cube.hideIds()
@@ -1388,17 +1436,32 @@ setupTasks.push( function(){
 					cube.setRadius()
 					updateControls( cube )
 				},
+				*/
 				function() {
 					cube.solve()
 				}
 			)
 
 		},
+		presetBigclock24: function(){
+			this.zoom = this.zoomSizeBig
+			this.presetClock24()
+		},
+		presetGiantclock24: function(){
+			this.zoom = this.zoomSizeGiant
+			// It will fit on thee screen better if not rotated so mush
+			this.rotationAngleX = 15
+			this.rotationAngleY = -15
+
+			this.presetClock24()
+		},
 		presetClock24: function(){
 
 			this.clockType = 24
+			setCameraZoom(this.zoom)
 
 			this.hideLogo()
+			this.hideClockLogo()
 			this.hideArrows()
 			this.hidePhotos()
 			this.hideClock12()
@@ -1408,7 +1471,7 @@ setupTasks.push( function(){
 
 
 			this.taskQueue.add(
-
+/*
 				function() {
 					$( 'body' ).css( 'background-color', '#000' )
 					$( 'body' ).addClass( 'graydient' )
@@ -1426,6 +1489,7 @@ setupTasks.push( function(){
 					this.setRadius()
 					updateControls( this )
 				},
+				*/
 				function() {
 					cube.solve()
 				}

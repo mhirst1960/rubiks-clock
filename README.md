@@ -22,7 +22,9 @@ From your Chrome browser (or Safari, or Edge, or a multitude of others) enter yo
 - `index.html#clock24` for a 24-hour "European" or "Military Time" clock
 
 ![alt Rubik's 12-hour Clock](media/clock12/clock12Screenshot.png "index.html#clock12")
+
 ![alt Rubik's 24-hour Clock](media/clock24/clock24Screenshot.png "index.html#clock24")
+
 ## Run as a Server
 If you want to share the clock with your friends at home, it is very easy to
 make this webpage available to any computer or smart phone in the house.
@@ -45,15 +47,23 @@ I put this on a dedicated Raspberry Pi that is continuously running at my house.
 
 
 
-Note: when typing in the URL on your browser, be careful which field put it.  don't type it into the Google search bar.  Google will never find it if it is just local inside your house.  Instead make sure to type it into the field for entering webpage URL addresses.  If one box does not work, ty the other.
+Note: when typing in the URL on your browser, be careful which field to put it.  don't type it into the Google search bar.  Google will never find it if it is just local inside your house.  Instead make sure to type it into the field for entering webpage URL addresses.  If one box does not work, try the other.
 
 Also, if you make changes locally, then you may need to clear cache to see the changes on a remote computer.
 
 # Raspberry Pi Installation
 
-## Raspberry Pi 4 inch display
+You will need a fairly powerful computer to run the javascript.
 
-I used these instructions to install the 4 inch display from the commandline from ssh login on the Raspberry Pi:
+- The Raspberry Pi 4b is a great choice for this.  It is a fast processor.  I have a 8GB model and it runs great.  The 1GB model should also be fine unless you plan to run a couple  more applications that use lots of memory.
+
+- The Raspberry Pi 3b works fine but can slow down a bit during moves so if you use this, you probably will want to minimize any extra applications running in the background. Maybe consider disabling VNC and other applications.
+- The Raspberry Pi Zero V1 is not at all powerful enough.  The graphic grind to a halt. It looks terrible.
+- I don't have a Raspberry Pi Zero V2.  I hear good thing.  It might be fast enough.  It worth a try.
+
+## Raspberry Pi - 4 inch display
+
+I used these instructions to install the 4 inch display from the command line from ssh login on the Raspberry Pi:
 
 
   cd ~/Downloads
@@ -63,15 +73,16 @@ I used these instructions to install the 4 inch display from the commandline fro
   cd LCD-show/
   sudo ./MPI4008-show
 
-Then from the commandline I run this (and hit F11 to exit full screen mode):
+Then from the command line I run this (and hit F11 to exit full screen mode):
 
 `/usr/bin/chromium-browser --start-fullscreen --app='file:///home/pi/rubiks-clock/index.html#clock12'`
 
 
 ## Install
-If you put the top directory rubiks-clock directly under /home/pi, you can run this command to install so it will automatically start every time you plug in your Raspberry.
+If you put the top directory rubiks-clock directly under /home/pi, you can run these commands to install so it will automatically start every time you plug in your Raspberry.
 
-  `/home/pi/service/install.sh`
+  `cd /home/pi/pi-init`
+  `./install.sh`
 
 - It installs the http server as a service so other computers can run the by webpage remotely.
 - It starts the Chrome browser automatically in full screen mode showing the clock.
@@ -84,7 +95,8 @@ If you would like to hide the mouse cursor run this command:
 ### Uninstall
 To undo these changes, you can run these command:
 
-   `/home/pi/service/uninstall.sh`
+  `cd /home/pi/pi-init`
+   `./uninstall.sh`
 
   `rm /home/pi/.config/lxpanel/LXDE-pi/panels/panel`
 
@@ -99,8 +111,8 @@ These are instructions that show how to set this up on a Raspberry Pi with a 4 i
 
 You will need:
 
-- Raspberriy Pi 4B
-- 32GB (or larger) micro SDcard
+- Raspberry Pi 4b
+- 8GB (or larger) micro SDcard
 - Miuzei 4-inch display https://www.amazon.com/dp/B07XBVF1C9?psc=1
   - https://geekdiywiki.com/4inchscreen
   - 
@@ -110,7 +122,7 @@ Install Raspberry Imager onto your PC (https://www.raspberrypi.com/software/)
 
 Run the Raspberry Pi Imager on your PC
 
-- Insert 32GB SDCard into an sdcard reader and plug into a USB port
+- Insert 8GB (or larger) SDCard into an sdcard reader and plug into a USB port
 - Operating System: Raspberry Pi OS (32 bit)
 - Storage:
   - Probably just one option
@@ -121,7 +133,7 @@ It will take 5-10 minutes or more to write the Raspberry Pi image onto the SDCar
 - Writing... xx%
 - Verifying... xx%
 
-Insert SDCard into your Rasbberry Pi 4B
+Insert SDCard into your Rasbberry Pi 4b
 
 The Miuzei display comes with 4 heat sinks. Stick on all of the heat sinks onto the Raspberry Pi board in the correct places.
 

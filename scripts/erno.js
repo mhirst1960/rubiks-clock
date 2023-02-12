@@ -394,6 +394,20 @@ function setupControls(){
 		//camera.updateProjectionMatrix()
 	})
 }
+function setCameraZoom(zPosition){
+	camera.position.z = zPosition
+	//camera.rotation.z = 1000
+	render()
+}
+function setCameraXY(xPosition, yPosition){
+	camera.position.x = xPosition
+	camera.position.y = yPosition
+	//camera.translateX(xPosition)
+	//camera.translatY(yPosition)
+	camera.updateProjectionMatrix()
+	//updateControls()	
+	render()
+}
 function onWindowResize(){
 	
 	var
@@ -477,11 +491,6 @@ function applyControls(){
 		if( $( '#attributeStickers' ).prop( 'checked' )) cube.showStickers()
 		else cube.hideStickers()
 	}
-	//if( $( '#attributeLogo' ).prop( 'indeterminate' ) !== true ){
-
-	//	if( $( '#attributeLogo' ).prop( 'checked' )) cube.showLogo()
-	//	else cube.hideLogo()
-	//}
 	if( $( '#attributePhotos' ).prop( 'indeterminate' ) !== true ){
 
 		if( $( '#attributePhotos' ).prop( 'checked' )) cube.showPhotos()

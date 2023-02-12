@@ -9,6 +9,7 @@ startMinutes = startDate.getMinutes()
 startHours = startDate.getHours()
 startMinutesSinceMidnight = (60 * startHours) + startMinutes
 catchUp = false
+catchupBlackAndWhite = false
 clockType = null
 clockDataPrevious = null
 newClockData = true
@@ -71,10 +72,10 @@ solver.logic = function( cube ){
         cube.show()
         cube.hidePlastics()
         cube.hideStickers()
-        //cube.hideLogo()
-        //cube.showPhotos()
+        cube.hideIntroverts()
 
         cube.hideLogo()
+        cube.hideClockLogo()
         cube.hideArrows()
         cube.hidePhotos()
 
@@ -88,7 +89,6 @@ solver.logic = function( cube ){
 
 
         cube.hideIds()
-        cube.hideIntroverts()
         cube.hideTexts()
         cube.showWireframes()
         cube.setOpacity()
@@ -98,10 +98,9 @@ solver.logic = function( cube ){
         cube.showIntroverts()
         cube.showPlastics()
         cube.showStickers()
-        //cube.hideLogo()
-        //cube.showPhotos()
 
         cube.hideLogo()
+        cube.hideClockLogo()
         cube.hideArrows()
         cube.hidePhotos()
 
@@ -167,7 +166,9 @@ solver.logic = function( cube ){
     if (newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 10) {
         catchUp = true
         cube.twistDuration = SECOND / 4
-        showCatchup(cube)
+        if (catchupBlackAndWhite) {
+            showCatchup(cube)
+        }
     } else if (catchUp) {
         catchUp = false
         cube.twistDuration = SECOND / 2
