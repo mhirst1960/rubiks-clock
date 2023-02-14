@@ -165,7 +165,7 @@ solver.logic = function( cube ){
 
     if (newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 10) {
         catchUp = true
-        cube.twistDuration = SECOND / 4
+        cube.twistDuration = 0
         if (catchupBlackAndWhite) {
             showCatchup(cube)
         }
