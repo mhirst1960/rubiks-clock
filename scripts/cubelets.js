@@ -898,7 +898,7 @@ setupTasks.push( function(){
 
 			var 
 			twistDuration = this.cube !== undefined ? this.cube.twistDuration : SECOND,
-			twistDurationScaled = [ degrees.absolute().scale( 0, 90, 0, twistDuration ), 250 ].maximum()
+			twistDurationScaled = [ degrees.absolute().scale( 0, 90, 0, twistDuration ), 0 ].maximum()
 
 
 			//  And now for the rotation tween itself...
