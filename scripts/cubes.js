@@ -1381,9 +1381,9 @@ setupTasks.push( function(){
 		presetGiantclock12: function(){
 			this.zoom = this.zoomSizeGiant
 			
-			// It will fit on thee screen better if not rotated so mush
-			this.rotationAngleX = 15
-			this.rotationAngleY = -15
+			// It will fit on thee screen better if not rotated so much
+			this.rotationAngleX = 17
+			this.rotationAngleY = -17
 
 			this.presetClock12()
 		},
@@ -1447,9 +1447,9 @@ setupTasks.push( function(){
 		},
 		presetGiantclock24: function(){
 			this.zoom = this.zoomSizeGiant
-			// It will fit on thee screen better if not rotated so mush
-			this.rotationAngleX = 15
-			this.rotationAngleY = -15
+			// It will fit on thee screen better if not rotated so much
+			this.rotationAngleX = 17
+			this.rotationAngleY = -17
 
 			this.presetClock24()
 		},
@@ -1477,15 +1477,53 @@ setupTasks.push( function(){
 
 		},
 		presetExperiments(){
+
+
+			this.clockType = 12
+
+			setCameraZoom(this.zoom)
+			this.rotationAngleX = 15
+			this.rotationAngleY = -15
+
+			//$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
+
+			this.hideLogo()
+			this.hideClockLogo()
+			this.hideArrows()
+			this.hidePhotos()
+
+			if (this.clockType ==24){
+				this.showClock24()
+				this.hideClock12()
+			} else {
+				this.showClock12()
+				this.hideClock24()	
+			}
+
+			this.clockInit()
+
+			updateControls( this )
+
+			if( erno.state === 'setup' ) {
+				this.presetBling()
+			//	this.showPhotos()
+			}
+
 			$( 'body' ).css( 'background-color', '#000' )
 			$( 'body' ).addClass( 'graydient' )
 			setTimeout( function(){ $( '.cubelet' ).removeClass( 'purty' )}, 1 )
-			this.show()
+			//this.show()
 			this.showIntroverts()
 			this.showPlastics()
 			this.showStickers()
-			//this.hideLogo()
-			this.showPhotos()
+
+			this.hideLogo()
+			this.hideClockLogo()
+			this.hideArrows()
+			this.hidePhotos()
+			//this.showClock12()
+			//this.hideClock24()
+
 			this.hideTexts()
 			this.hideWireframes()
 			this.hideIds()
@@ -1493,28 +1531,76 @@ setupTasks.push( function(){
 			this.setRadius()
 			updateControls( this )
 
+
 			this.twistDuration = SECOND / 4
+
+			movesMidnightToTime = function( hours, minutes ){
+
+				if (cube.clockType == 24){
+					clockData = rubiksClock24Data
+				} else {
+					clockData = rubiksClockData12
+				}
+				index = hours * 60 + minutes
+				moves = clockData[index][1]
+				return cube.reverseMoves(moves)
+
+			}
+
+			movesFromTo = function(startHours, startMinutes, endHours, endMinutes) {
+
+				if (cube.clockType == 24){
+					clockData = rubiksClock24Data
+				} else {
+					clockData = rubiksClockData12
+				}
+				moves = "" //movesMidnightToTime(startHours, startMinutes)
+
+				indexStart = startHours * 60 + startMinutes
+				indexEnd = endHours * 60 + endMinutes
+				for (i=indexStart+1; i<=indexEnd; i++){
+					moves += clockData[i][0]
+				}
+
+				return moves
+			}
+
+			hours1   = 12+8
+			minutes1 = 57
+
+			hours2   = 12+8
+			minutes2 = 58
 
 			this.taskQueue.add(
 
 				function() {
-					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
+					cube.taskQueue.isReady = false					
+
+					setTimeout( function(){ cube.taskQueue.isReady = true }, SECOND )
 				},
 				function(){
 
-					var clockData = rubiksClockData
-					moves = ""
+					var clockData = rubiksClockData12
+					moves = movesMidnightToTime(hours1, minutes1)
+					this.twistDuration = SECOND / 4
 
-	
-					moves += "BZDDbDz" + "rFDDFRRFFUUBBLLBBUUmEMDDmeMDD"
-					//moves += "B Z D D b D z " + "b D D " + "D D B r F D D F R R F F U U B B L L B B U U m E M D D m e M D D d d m E M d d m e M"
 					cube.twistQueue.add( moves )
+					cube.taskQueue.isReady = false					
 
-					// down 180
-					//cube.twistQueue.add( 'DRLDDrl DRLDDrl')
+					setTimeout( function(){ cube.taskQueue.isReady = true }, 20*SECOND )
 
 				},
-			)
+				function(){
+
+					var clockData = rubiksClockData12
+
+					moves = movesFromTo(hours1, minutes1, hours2, minutes2)
+					cube.twistDuration = SECOND / 2
+
+					cube.twistQueue.add( moves )
+
+				},
+				)
 		},
 		presetLogo: function(){
 
