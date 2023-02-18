@@ -10,7 +10,7 @@
 //   - state of the cube at this moment of the day in terms of sticker colors
 //   - rotation state of the 6 center pieces ULFRBD.  Multiply number by 90 to get angle compared to initial cube
 
-rubiksClockData = {
+rubiksClockData12 = {
 // 00:01
 "1":["BZDDbDz", "rFDDFRRFFUUBBLLBBUUmEMDDmeMDD", "OOYOOYOOYGGGWWBRRRGYYGGGWWOBBBRYYOGGWWBRBBOWWRRWRRYBBY", "020002"], 
 // 00:02

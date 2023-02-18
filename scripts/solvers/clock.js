@@ -9,7 +9,14 @@ startMinutes = startDate.getMinutes()
 startHours = startDate.getHours()
 startMinutesSinceMidnight = (60 * startHours) + startMinutes
 catchUp = false
+
+// first time we boot we want to show long sequence of moves at .25 seconds as part of "bling"
+// forever after (aka when browser wakes from sleep) if we need to catchup then do it fast and hidden
+lightningCatchup = false
+
+// normally we just hide the cube but set this to true to show a black&white version while it solves
 catchupBlackAndWhite = false
+
 clockType = null
 clockDataPrevious = null
 newClockData = true
@@ -69,10 +76,15 @@ solver.logic = function( cube ){
 
     function showCatchup( cube ){
 
-        cube.show()
+        if (!catchupBlackAndWhite) {
+            cube.hide() 
+        }
+  
         cube.hidePlastics()
         cube.hideStickers()
         cube.hideIntroverts()
+        cube.hideClock12()
+        cube.hideClock24()
 
         cube.hideLogo()
         cube.hideClockLogo()
@@ -95,6 +107,7 @@ solver.logic = function( cube ){
 	}
 
     function showNormal( cube) {
+        cube.show()
         cube.showIntroverts()
         cube.showPlastics()
         cube.showStickers()
@@ -134,7 +147,7 @@ solver.logic = function( cube ){
     clockType = cube.clockType
 
     if (cube.clockType == 12) {
-        clockData = rubiksClockData
+        clockData = rubiksClockData12
     } else {
         clockData = rubiksClock24Data
     }
@@ -159,16 +172,23 @@ solver.logic = function( cube ){
         minutesSinceMidnight -= startMinutesSinceMidnight
     }
 
-    // TODO probably want to just continue with the sequence
-    //      if we are behind by just a few minutes.  Just do
-    //      it a few times and we wil be caught up
+    // Faster cube solving if
+    // - not 11:59 to 12:00 (aka normal slow speed even thought the sequence is long)
+    // - we are switching clocks types from 12hr to 24hr or 24hr to 12hr
+    // - current time if pretty far from previous time: more than 4 minutes away
 
-    if (newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 10) {
+    // TODO: should fade in or something.  It is kind of startling to have the clock hidden for a second or two
+    //       maybe clone and show the old clock then switch it out when ready.
+    
+    if (clockIndex != 11*60+59 && newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 4) {
         catchUp = true
-        cube.twistDuration = SECOND / 4
-        if (catchupBlackAndWhite) {
+        if (lightningCatchup) {
+            cube.twistDuration = 0
             showCatchup(cube)
+        } else {
+            cube.twistDuration = SECOND / 4
         }
+
     } else if (catchUp) {
         catchUp = false
         cube.twistDuration = SECOND / 2
@@ -184,7 +204,6 @@ solver.logic = function( cube ){
             move = clockDataPrevious[clockIndex-1][1]
         }
         move += reverseMoves(clockData[minutesSinceMidnight][1])
-        // TODO fix rotation of centers
         cube.twistQueue.add( move )
         clockIndex = minutesSinceMidnight + 1
     } else {
@@ -205,6 +224,9 @@ solver.logic = function( cube ){
         // should show the cube after solving
         // setTimeout( function(){ show stuff }, SECOND * 60 )
     }
+
+    // We have now initialized the clock.  All catchup should be done quickly
+    lightningCatchup = true
 
     // execute next sequence in 15 seconds
     setTimeout(
