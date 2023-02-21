@@ -1482,9 +1482,14 @@ setupTasks.push( function(){
 			this.clockType = 12
 
 			setCameraZoom(this.zoom)
-			this.rotationAngleX = 15
-			this.rotationAngleY = -15
+			//this.rotationAngleX = 15
+			//this.rotationAngleY = -15
 
+			// kiosk angle = 17
+			this.rotationAngleX = 17
+			this.rotationAngleY = -17
+
+			this.presetZoomGiant()
 			//$("link[rel*='icon']").attr("href", "media/rubiks-clock-favicon.png");
 
 			this.hideLogo()
@@ -1508,6 +1513,9 @@ setupTasks.push( function(){
 				this.presetBling()
 			//	this.showPhotos()
 			}
+			// kiosk angle = 17
+			this.rotationAngleX = 17
+			this.rotationAngleY = -17
 
 			$( 'body' ).css( 'background-color', '#000' )
 			$( 'body' ).addClass( 'graydient' )
@@ -1565,18 +1573,18 @@ setupTasks.push( function(){
 				return moves
 			}
 
-			hours1   = 12+8
-			minutes1 = 57
+			hours1   = 12+6
+			minutes1 = 23
 
-			hours2   = 12+8
-			minutes2 = 58
+			hours2   = 12+6
+			minutes2 = 24
 
 			this.taskQueue.add(
 
 				function() {
 					cube.taskQueue.isReady = false					
 
-					setTimeout( function(){ cube.taskQueue.isReady = true }, SECOND )
+					setTimeout( function(){ cube.taskQueue.isReady = true }, 5*SECOND )
 				},
 				function(){
 
