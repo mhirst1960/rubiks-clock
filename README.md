@@ -3,8 +3,9 @@ Rubik's Clock
 
 Rubiks'c clock presents a webpage of a Rubik's cube that automatically updates every minutes
 showing the current time of day.
+![alt Rubik's Clock on the desk](media/623-624-kiosk-2.gif "Rubik's Clock!")
 
-![alt Rubik's Clock](media/856.png "index.html")
+
 
 The implementation is based on the javascript/HTML code of Cuber found at https://github.com/stewdio/Cuber-DEMO. Cuber is a Rubik’s Cube simulator.  Rubik's Clock adds the concept of a photo cube to
 Cuber.  The 6 PNG images are carefully crafted with a set of numbers on all sides.  It implements a solver that moves the pieces every minute so the numbers of the current hour and minute show on the front of the cube.
@@ -24,7 +25,7 @@ From your Chrome browser (or Safari, or Edge, or a multitude of others) enter yo
 
 #### 12-hour
 ![alt Rubik's 12-hour Clock](media/clock12/clock12Screenshot.png "index.html#clock12")
-
+![alt Rubik's Clock](media/856.png "index.html")
 #### 24-hour
 ![alt Rubik's 24-hour Clock](media/clock24/clock24screenshot.png "index.html#clock24")
 
@@ -32,10 +33,12 @@ From your Chrome browser (or Safari, or Edge, or a multitude of others) enter yo
 If you want to share the clock with your friends at home, it is very easy to
 make this webpage available to any computer or smart phone in the house.
 
-Install python3 if you don't already have it.  Then run this command:
+Install python3 if you don't already have it.  Then run this command from the same directory that contains index.html:
+
 `python3 -m http.server 80`
 
 If you prefer the older python2 you could also do this:
+
 `python2 -m SimpleHTTPServer 80`
 
 The URL your friends will need is based on your computer name where you ran the previous command.  Often you need to append `.local` to the end of you computer's name to access it.  For instance, if your computer is named `mycomputer` then this is the URL you want to tell your friends to go to:
@@ -61,8 +64,8 @@ You will need a fairly powerful computer to run the javascript.
 - The Raspberry Pi 4b is a great choice for this.  It is a fast processor.  I have a 8GB model and it runs great.  The 1GB model should also be fine unless you plan to run a couple  more applications that use lots of memory.
 
 - The Raspberry Pi 3b works fine but can slow down a bit during moves so if you use this, you probably will want to minimize any extra applications running in the background. Maybe consider disabling VNC and other applications.
-- The Raspberry Pi Zero V1 is not at all powerful enough.  The graphic grind to a halt. It looks terrible.
-- I don't have a Raspberry Pi Zero V2.  I hear good thing.  It might be fast enough.  It worth a try.
+- The Raspberry Pi Zero V1 is not at all powerful enough.  The graphics grind to a halt. It looks terrible.
+- I don't have a Raspberry Pi Zero V2.  I hear good things.  It might be fast enough.  Definitely worth a try.
 
 ## Raspberry Pi - 4 inch display
 
@@ -146,9 +149,10 @@ Power on
 ssh pi@rubiks-clock.local
 
 
-## Installing DIsplay Driver
+## Installing Display Driver
 The Miuzei 4-inch display requires special driver to run on a Raspberry Pi.
 Download the package from the website and install based on the instructions.
+
 
 
 ==================================================
