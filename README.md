@@ -26,7 +26,7 @@ From your Chrome browser (or Safari, or Edge, or a multitude of others) enter yo
 ![alt Rubik's 12-hour Clock](media/clock12/clock12Screenshot.png "index.html#clock12")
 
 #### 24-hour
-![alt Rubik's 24-hour Clock](media/clock24/clock24Screenshot.png "index.html#clock24")
+![alt Rubik's 24-hour Clock](media/clock24/clock24screenshot.png "index.html#clock24")
 
 ## Run as a Server
 If you want to share the clock with your friends at home, it is very easy to
