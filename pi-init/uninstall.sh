@@ -6,7 +6,7 @@ sudo systemctl disable rubiks-clock-http.service
 sudo rm -f /lib/systemd/system/rubiks-clock-http.service
 
 
-echo diabling full-screen browser autostart...
+echo disabling full-screen browser autostart...
 
 rm -f /home/pi/.config/autostart/rubiks-clock.desktop 
 
