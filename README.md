@@ -86,10 +86,59 @@ Then from the command line I run this (and hit F11 to exit full screen mode):
 If you put the top directory rubiks-clock directly under /home/pi, you can run these commands to install so it will automatically start every time you plug in your Raspberry.
 
   `cd /home/pi/pi-init`
+
   `./install.sh`
 
-- It installs the http server as a service so other computers can run the by webpage remotely.
-- It starts the Chrome browser automatically in full screen mode showing the clock.
+By default it does this
+- It installs the http server as a service so other computers can run the webpage remotely.
+- It starts the Chrome browser automatically in full screen mode showing the 12-hour clock.
+- Shows a rubik's cube as the Raspberry Pi is booting (aka splash screen)
+- Sets the user's background image to a Rubik's Cube
+- removes desktop clutter such as the trash can and mounted drives
+
+But if you prefer a different configuration than the default you can.  Here are a couple of common choices:
+
+- To show a 24-hour clock
+  
+  `./install.sh --style 24`
+
+- To disable the http server so other computer will not be able to connect and run your clock remotely:
+  
+  `./install.sh --no-httpserver`
+
+- To disable the full-screen Rubuk's cube:
+  
+  `./install.sh --no-screensaver`
+
+Here is a full list of options available:
+
+```
+   Usage:  [--style 12|24] [--no-http] [--no-splash] [--no-wallpaper] [--keep-trash] [--keep-mounts]
+
+   All arguments are optional here is a summary:
+     -h, --help           show this help message
+     --style              12 = 12-hour clock, 24 = 24-hour clock
+     --no-http            do not install http server
+     --no-screensaver     do not automatically show Rubik's Cube clock full screen
+     --no-splash          do not install custom boot splash screen
+     --no-wallpaper       do not install rubik's cube wallpaper
+     --keep-trash         do not hide the trashcan icon
+     --keep-mounts        do not hide sdcard mount icons
+     --no-extras          do not modify: splash screen, wallpaper, desktop icons
+```
+
+The install script will display what it plans to modify and pause to ask you if everything is good.  If you answer "yes" it will install it.  Here is an example:
+
+```
+install http server        = y
+auto-start browser         = y
+clock style                = 12
+cube splash screen on boot = y
+cube desktop               = y
+hide trashcan icon         = y
+hide sdcard mounts icons   = y
+Is configuration good? [Y or N] 
+```
 
 #### Hide the Cursor
 If you would like to hide the mouse cursor run this command:
