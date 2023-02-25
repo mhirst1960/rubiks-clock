@@ -71,13 +71,24 @@ echo "cube splash screen on boot = $installsplash"
 echo "cube desktop               = $installwallpaper"
 echo "hide trashcan icon         = $hidetrash"
 echo "hide sdcard mounts icons   = $hidemounts"
-timedatectl show | grep Timezone
 echo
+timedatectl show | grep Timezone
+
+
 
 if [ "$clockstyle" != 12 ] && [ "$clockstyle" != 24 ]; then
     echo "Illegal value --style must be either 12 or 24"
     exit 1
 fi
+
+echo -n "Current time: "
+if [ "$clockstyle" == 24 ] ; then
+    date +"%R"
+else
+    date +"%r"
+fi
+
+echo
 
 while true; do
     read -p "Is configuration good? [Y or N] " yn
