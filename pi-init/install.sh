@@ -71,6 +71,8 @@ echo "cube splash screen on boot = $installsplash"
 echo "cube desktop               = $installwallpaper"
 echo "hide trashcan icon         = $hidetrash"
 echo "hide sdcard mounts icons   = $hidemounts"
+timedatectl show | grep Timezone
+echo
 
 if [ "$clockstyle" != 12 ] && [ "$clockstyle" != 24 ]; then
     echo "Illegal value --style must be either 12 or 24"
