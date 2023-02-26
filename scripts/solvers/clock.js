@@ -2,12 +2,24 @@
 // Cycle through canned sequence of moves that show the time of day on the
 // front of the Rubik's cube
 
-useFakeTime = false // set to true for debugging startup
+useFakeTime = false // set to true for debugging a given time of day
+fakeStartHour = 23
+fakeStartMinute = 58
+
+fakeOffsetMilliseconds = (fakeStartHour*60 + fakeStartMinute)*60000
 
 startDate = new Date()
+startMilliseconds = startDate.getTime()
 startMinutes = startDate.getMinutes()
 startHours = startDate.getHours()
+
 startMinutesSinceMidnight = (60 * startHours) + startMinutes
+fakeOffsetMilliseconds -= startMinutesSinceMidnight * 60000
+
+if (useFakeTime) {
+    startDate.setTime(startMilliseconds+fakeOffsetMilliseconds)
+}
+
 catchUp = false
 
 // first time we boot we want to show long sequence of moves at .25 seconds as part of "bling"
@@ -20,12 +32,15 @@ catchupBlackAndWhite = false
 clockType = null
 clockDataPrevious = null
 newClockData = true
+rolloverToNewDay = false
 
 clockIsSolved = false
 clockIndex = 1
-window.solver = new Solver()
-solver.consider = function( cube ){
 
+
+window.solver = new Solver()
+
+solver.consider = function( cube ){
 
 	//  Was our solver passed a valid Cube?
 	//  Kind of important, eh?
@@ -164,12 +179,18 @@ solver.logic = function( cube ){
 
     var date = new Date()
 
+    if (useFakeTime) {
+        realMilliseconds = date. getTime()
+        date.setTime(realMilliseconds+fakeOffsetMilliseconds)
+    }
+
     minutes = date.getMinutes();
     hours = date.getHours();
     minutesSinceMidnight = (60 * hours) + minutes;
 
-    if (useFakeTime) {
-        minutesSinceMidnight -= startMinutesSinceMidnight
+    if (rolloverToNewDay || clockIndex == 11*60+59 || clockIndex == 12*60 || clockIndex == 0) {
+        lightningCatchup = false
+        catchup = true
     }
 
     // Faster cube solving if
@@ -179,12 +200,13 @@ solver.logic = function( cube ){
 
     // TODO: should fade in or something.  It is kind of startling to have the clock hidden for a second or two
     //       maybe clone and show the old clock then switch it out when ready.
-    
-    if (clockIndex != 11*60+59 && newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 4) {
+
+    if (newClockData || Math.abs(minutesSinceMidnight - clockIndex) > 4) {
         catchUp = true
         if (lightningCatchup) {
             cube.twistDuration = 0
             showCatchup(cube)
+            //cube.zoomInFromFar()
         } else {
             cube.twistDuration = SECOND / 4
         }
@@ -199,7 +221,15 @@ solver.logic = function( cube ){
 
 
         if (clockIndex <= 1) {
-            move = ""
+            if (rolloverToNewDay) {
+                if (clockIndex == 0) {
+                    move = clockDataPrevious[60*24][1]
+                } else {
+                    move = clockDataPrevious[1][1]
+                }
+            } else {
+                move = " "
+            }
         } else {
             move = clockDataPrevious[clockIndex-1][1]
         }
@@ -213,6 +243,12 @@ solver.logic = function( cube ){
             cube.twistQueue.add( move )
             clockIndex += 1
         }
+    }
+
+    if (clockIndex == 24*60 || clockIndex == 0) {
+        rolloverToNewDay = true
+    } else {
+        rolloverToNewDay = false
     }
 
     clockDataPrevious = clockData
