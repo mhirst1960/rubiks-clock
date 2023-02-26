@@ -11,6 +11,8 @@
 //   - rotation state of the 6 center pieces ULFRBD.  Multiply number by 90 to get angle compared to initial cube
 
 rubiksClock24Data = {
+// 00:00 midnight
+"0":["XXBBRRBBDDuLLuFFDDBBRUUBrdBLLFFubSBEsebLemESMsl", "", "OOOOOOOOOGGGWWWBBBYYYGGGWWWBBBYYYGGGWWWBBBYYYRRRRRRRRR", "000000"],
 // 00:01
 "1":["D", "d", "OOOOOOOOOGGGWWWBBBYYYGGGWWWBBBYYYYYYGGGWWWBBBRRRRRRRRR", "000000"], 
 // 00:02
