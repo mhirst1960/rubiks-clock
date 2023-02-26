@@ -197,5 +197,15 @@ fi
 
 if [ "$installhttp" == 'y' ]; then
     echo "http server will run when system boots"
+
+    hostname=`hostname`
+    ping -c 1 $hostname.local >& /dev/null
+    if [ "$?" == '0' ]; then
+        echo
+        echo Webpage is:
+        echo
+        echo      http://$hostname.local
+        echo
+    fi
 fi
 
