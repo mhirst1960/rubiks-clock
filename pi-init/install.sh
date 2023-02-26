@@ -16,9 +16,20 @@
 # If you don't like any one of these modifications
 # you can comment out the line or line you don't like
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+progname=${BASH_SOURCE[0]}
+
+#set default sytle based on current localization
+date | grep -iEq 'am|pm'
+if [ "$?" == '0' ]; then
+    clockstyle=12
+else
+    clockstyle=24
+fi
+
 installhttp='y'
 runbrowser='y'
-clockstyle=12
 installsplash='y'
 installwallpaper='y'
 hidetrash='y'
@@ -45,6 +56,28 @@ function usage()
 HEREDOC
 } 
 
+function hints()
+{
+    cat << HEREDOC
+    
+Hints:
+    For help about installation options run this:
+        $progname -h
+
+    If your time is not correct you may need to set your timezone.
+    Try setting Localisation Options/TimeZone from this command:
+        sudo raspi-config
+
+    Also note that the default style is based on the Raspberri Pi locale settings.
+    If you want a 12-hour clock but you got this:
+        clock style                = 24
+    You might consider setting the system local for your region from raspi-config.
+    Or you can add this option to the insall.sh command:
+        $progname --style 24
+            
+HEREDOC
+
+}
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -h | --help ) usage; exit; ;;
@@ -94,12 +127,11 @@ while true; do
     read -p "Is configuration good? [Y or N] " yn
     case $yn in
         [Yy]* ) break;;
-        [Nn]* ) exit;;
+        [Nn]* ) echo; echo "Aborting the install"; hints; exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 if [ "$installhttp" == 'y' ]; then
 ## Web server
