@@ -129,7 +129,7 @@ function Cube( preset ){
 	this.zoomSizeBig = 1200
 	this.zoomSizeGiant = 900
 
-	this.defaultClockIs24 = false  // set to true if you want 24-hour clock as default preset
+	this.defaultClockIs24 = defaultClockIs24  || false // from defaults.js set to true if you want 24-hour clock as default preset
 
 	//  Size matters? Cubelets will attempt to read these values.
 	this.size = 420
@@ -1098,8 +1098,8 @@ setupTasks.push( function(){
 
 			var cube = this
 			
-			xAngle = this.rotationAngleX || 25
-			yAngle = this.rotationAngleY || -30
+			xAngle = this.rotationAngleX || rotationAngleX || 25
+			yAngle = this.rotationAngleY || rotationAngleY || -30
 
 			this.threeObject.position.y = -2000
 			new TWEEN.Tween( this.threeObject.position )
@@ -1308,6 +1308,15 @@ setupTasks.push( function(){
 			
 			}, 1 )
 		},
+		zoomInFromFar: function (){
+			this.threeObject.position.y = 2000
+			new TWEEN.Tween( this.threeObject.position )
+				.to({ 
+					y: 0
+				}, SECOND * 2 )
+				.easing( TWEEN.Easing.Quartic.Out )
+				.start()
+		},
 		clockInit: function(){
 			//$("#favicon").attr("href","media/rubiks-clock-favicon.png")
 			// TODO set title to "Rubik's Clock"
@@ -1382,8 +1391,8 @@ setupTasks.push( function(){
 			this.zoom = this.zoomSizeGiant
 			
 			// It will fit on thee screen better if not rotated so much
-			this.rotationAngleX = 17
-			this.rotationAngleY = -17
+			//this.rotationAngleX = 17
+			//this.rotationAngleY = -17
 
 			this.presetClock12()
 		},
@@ -1448,8 +1457,8 @@ setupTasks.push( function(){
 		presetGiantclock24: function(){
 			this.zoom = this.zoomSizeGiant
 			// It will fit on thee screen better if not rotated so much
-			this.rotationAngleX = 17
-			this.rotationAngleY = -17
+			//this.rotationAngleX = 17
+			//this.rotationAngleY = -17
 
 			this.presetClock24()
 		},
@@ -1479,7 +1488,7 @@ setupTasks.push( function(){
 		presetExperiments(){
 
 
-			this.clockType = 12
+			this.clockType = 24
 
 			setCameraZoom(this.zoom)
 			//this.rotationAngleX = 15
@@ -1573,11 +1582,11 @@ setupTasks.push( function(){
 				return moves
 			}
 
-			hours1   = 12+6
-			minutes1 = 23
+			hours1   = 12+2
+			minutes1 = 20
 
-			hours2   = 12+6
-			minutes2 = 24
+			hours2   = 12+2
+			minutes2 = 21
 
 			this.taskQueue.add(
 
