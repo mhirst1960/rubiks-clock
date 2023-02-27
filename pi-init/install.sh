@@ -164,6 +164,12 @@ if [ "$installwallpaper" == 'y' ]; then
 fi
 
 ## Hide desktop clutter
+
+if [ "$hidetrash" == 'y' ] || [ "$hidemounts" == 'y' || "$autohidecursor" == 'y' ]; then
+    sudo apt update
+    sudo apt -y install unclutter
+fi
+
 if [ "$hidetrash" == 'y' ]; then
     echo hide trashcan..
     sed -i s/show_trash=1/show_trash=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
@@ -174,7 +180,7 @@ if [ "$hidemounts" == 'y' ]; then
     sed -i s/show_mounts=1/show_mounts=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 fi
 
-grep  point_at_menu /home/pi/.config/lxpanel/LXDE-pi/panels/panel >& /dev/null
+tail -1 /home/pi/.config/lxpanel/LXDE-pi/panels/panel | grep  point_at_menu >& /dev/null
 havepointat=$?
 
 if [ "$autohidecursor" == 'y' ]; then
