@@ -34,6 +34,7 @@ installsplash='y'
 installwallpaper='y'
 hidetrash='y'
 hidemounts='y'
+autohidecursor='y'
 
 function usage()
 {
@@ -51,6 +52,7 @@ function usage()
      --no-wallpaper       do not install rubik's cube wallpaper
      --keep-trash         do not hide the trashcan icon
      --keep-mounts        do not hide sdcard mount icons
+     --no-autohide-cursor do not automatically hide the mouse cursor on timeout
      --no-extras          do not modify: splash screen, wallpaper, desktop icons
 
 HEREDOC
@@ -86,11 +88,13 @@ while [[ "$#" -gt 0 ]]; do
         --no-screensaver) runbrowser='n' ;;
         --no-splash) installsplash='n' ;;
         --no-wallpaper) installwallpaper='n' ;;
+        --no-autohide-cursor) autohidecursor='n' ;;
         --keep-trash) hidetrash='n' ;;
         --keep-mounts) hidemounts='n' ;;
         --no-extras) installsplash='n'
                     installwallpaper='n'
                     hidetrash='n'
+                    autohidecursor='n'
                     hidemounts='n' ;;
         *) echo "Unknown parameter: $1"; usage; exit 1 ;;
     esac
@@ -104,6 +108,7 @@ echo "cube splash screen on boot = $installsplash"
 echo "cube desktop               = $installwallpaper"
 echo "hide trashcan icon         = $hidetrash"
 echo "hide sdcard mounts icons   = $hidemounts"
+echo "autohide mouse cursor      = $autohidecursor"
 echo
 timedatectl show | grep Timezone
 
@@ -159,6 +164,12 @@ if [ "$installwallpaper" == 'y' ]; then
 fi
 
 ## Hide desktop clutter
+
+if [ "$hidetrash" == 'y' ] || [ "$hidemounts" == 'y' || "$autohidecursor" == 'y' ]; then
+    sudo apt update
+    sudo apt -y install unclutter
+fi
+
 if [ "$hidetrash" == 'y' ]; then
     echo hide trashcan..
     sed -i s/show_trash=1/show_trash=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
@@ -167,6 +178,23 @@ fi
 if [ "$hidemounts" == 'y' ]; then
     echo hide mounts..
     sed -i s/show_mounts=1/show_mounts=0/ /home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
+fi
+
+tail -1 /home/pi/.config/lxpanel/LXDE-pi/panels/panel | grep  point_at_menu >& /dev/null
+havepointat=$?
+
+if [ "$autohidecursor" == 'y' ]; then
+    echo automatically hide mouse cursor..
+    if [ "$havepointat" == '0' ]; then
+        sed -i s/point_at_menu=1/point_at_menu=0/ /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+    else
+        echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+    fi
+else
+    echo NOT automatically hiding mouse cursor..
+    if [ "$havepointat" == '0' ]; then
+        sed -i s/point_at_menu=0/point_at_menu=1/ /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+    fi
 fi
 
 if [ "$runbrowser" == 'y' ]; then
