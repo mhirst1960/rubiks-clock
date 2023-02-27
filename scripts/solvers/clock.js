@@ -27,7 +27,7 @@ catchUp = false
 lightningCatchup = false
 
 // normally we just hide the cube but set this to true to show a black&white version while it solves
-catchupBlackAndWhite = false
+catchupBlackAndWhite = true
 
 clockType = null
 clockDataPrevious = null

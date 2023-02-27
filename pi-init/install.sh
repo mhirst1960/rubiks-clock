@@ -183,6 +183,12 @@ else
     rm -f /home/pi/.config/autostart/rubiks-clock.desktop 
 fi
 
+if [ "$clockstyle" == '24' ]; then
+    cp $SCRIPT_DIR/../scripts/defaults24.js $SCRIPT_DIR/../scripts/userdefaults.js
+else
+    cp $SCRIPT_DIR/../scripts/defaults12.js $SCRIPT_DIR/../scripts/userdefaults.js
+fi
+
 #echo
 #echo 'If you want to hide the cursor, run this command:'
 #echo 'echo point_at_menu=0 >> /home/pi/.config/lxpanel/LXDE-pi/panels/panel'
