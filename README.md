@@ -41,6 +41,7 @@ Press the Options button on the upper-right to show the cube in different config
   - 24 hour switches the clock to 24-hour mode
 - Size gives you a selection of different sizes from tiny to giant
 - Extras
+  - Cube control allows you to rotate the cube with your mouse
   - Auto rotate will set the cube in motion
   - Show twist notation will flash the move letter as the cube transitions to a new time of day
   - Cube face labels shows the name of each face.
