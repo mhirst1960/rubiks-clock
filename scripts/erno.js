@@ -511,6 +511,7 @@ function applyControls(){
 	cube.isShuffling = $( '#actionShuffle' ).prop( 'checked' )
 	cube.isRotating  = $( '#actionRotate'  ).prop( 'checked' )
 	$( '#twist' ).css( 'visibility', $( '#actionNotation' ).prop( 'checked' ) ? 'visible' : 'hidden' )
+	$( '#brightness' ).css( 'pointer-events', $( '#actionAllowCubeControl' ).prop( 'checked' ) ? 'none' : 'all' )
 	cube.setText( $( '#texts' ).val())
 }
 function updateControls( cube ){
@@ -568,6 +569,7 @@ function updateControls( cube ){
 	$( '#actionShuffle'  ).prop( 'checked', cube.isShuffling )
 	$( '#actionNotation' ).prop( 'checked', $( '#twist' ).css( 'visibility' ) === 'visible' ? true : false )
 	$( '#actionRotate'   ).prop( 'checked', cube.isRotating )
+	$( '#actionAllowCubeControl' ).prop( 'checked', $( '#brightness' ).css( 'pointer-events' ) === 'none' ? true : false )
 
 	$( '#texts' ).val( cube.getText( 0 ))
 }
