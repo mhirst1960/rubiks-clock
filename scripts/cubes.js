@@ -98,6 +98,8 @@ function Cube( preset ){
 	this.isRotating  = false
 	this.isSolving   = false
 
+	this.brightness = 1.0
+
 
 	//  Every fire of this.loop() will attempt to complete our tasks
 	//  which can only be run if this.isReady === true.
@@ -1082,9 +1084,22 @@ setupTasks.push( function(){
 			this.showingFaceLabels = false
 		},
 
+		decreaseBrightness: function () {
 
-
-
+			if (this.brightness <= 0.25) {
+				this.brightness = 1.0
+			} else if (this.brightness >= 1.0) {
+				this.brightness = 0.8
+			} else {
+				this.brightness -= 0.3
+			}
+			if (this.brightness < 0.2) {
+				this.brightness = 1.0
+			}
+			dimness = 1.0-this.brightness
+			$( '#brightness' ).css( 'opacity', dimness )
+		
+		},
 
 
 		    /////////////////

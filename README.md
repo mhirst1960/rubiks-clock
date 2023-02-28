@@ -27,6 +27,30 @@ From your Chrome browser (or Safari, or Edge, or a multitude of others) enter yo
 #### 24-hour
 ![alt Rubik's 24-hour Clock](media/clock24/clock24screenshot.png "index.html#clock24")
 
+## Buttons and Widgets
+
+### Brightness
+The entire left side of the window is a big hidden button that controls the brightness.
+There are four brightness settings.  Keep pressing the left side to make the display dimmer.
+Eventually it wil go to full brightness again.
+
+### Options
+Press the Options button on the upper-right to show the cube in different configurations:
+- Clock Style
+  - 12 hour shows the clock in 12-hour mode (am/pm)
+  - 24 hour switches the clock to 24-hour mode
+- Size gives you a selection of different sizes from tiny to giant
+- Extras
+  - Auto rotate will set the cube in motion
+  - Show twist notation will flash the move letter as the cube transitions to a new time of day
+  - Cube face labels shows the name of each face.
+    - Up
+    - Left
+    - Front (is the face with the current time of day)
+    - Right
+    - Back
+    - Down
+
 ## Run as a Server
 If you want to share the clock with your friends at home, it is very easy to
 make this webpage available to any computer or smart phone in the house.
