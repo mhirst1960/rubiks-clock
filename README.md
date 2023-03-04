@@ -178,7 +178,14 @@ To undo these changes, you can run these command:
 
   `rm /home/pi/.config/lxpanel/LXDE-pi/panels/panel`
 
+### Upgrade
+Upgrading to the latest version of the Clock is easy.  Just do this:
 
+  `cd /home/pi/pi-init`
+  
+  `./upgrade.sh`
+
+The script will ask you "are you sure" then it simply executes the command `git pull` to grab the latest code changes.
 
 ============================================================================
 # Raspberry Pi
