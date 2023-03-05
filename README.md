@@ -5,6 +5,8 @@ Rubiks'c clock presents a webpage of a Rubik's cube that automatically updates e
 
 ![alt Rubik's Clock on the desk](media/623-624-kiosk-2.gif "Rubik's Clock!")
 
+This is the javascript engine behind the great Instructable `Rubik's Clock` documented here: https://www.instructables.com/Rubiks-Clock/
+
 The implementation is based on the javascript/HTML code of Cuber found at https://github.com/stewdio/Cuber-DEMO. Cuber is a Rubik’s Cube simulator.  Rubik's Clock adds the concept of a photo cube to
 Cuber.  The 6 PNG images are carefully crafted with a set of numbers on all sides.  It implements a solver that moves the pieces every minute so the numbers of the current hour and minute show on the front of the cube.
 
