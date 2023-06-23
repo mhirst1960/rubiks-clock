@@ -599,6 +599,24 @@ table, td, tr {
 
     /****************/
    /*              */
+  /*   footer     */
+ /*              */
+/****************/
+
+#footer {
+	position: absolute;
+	bottom:   0;
+	left: 0;
+	width: 90%;	
+	height: 200px;
+	color: rgba( 255, 255, 255, 1.0 );
+	overflow: auto;
+	text-align: right;
+}
+
+
+    /****************/
+   /*              */
   /*   Controls   */
  /*              */
 /****************/
