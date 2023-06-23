@@ -5,6 +5,13 @@ Rubiks'c clock presents a webpage of a Rubik's cube that automatically updates e
 
 ![alt Rubik's Clock on the desk](media/623-624-kiosk-2.gif "Rubik's Clock!")
 
+## Websites
+Here are a couple of webpages that show the clock:
+
+ - 12 hour (USA) Rubik's clock: http://rubiksclock.com/
+ - 24 hour Rubik's clock:      http://24.rubiksclock.com/
+  
+## Javascript Code
 This is the javascript engine behind the great Instructable `Rubik's Clock` documented here: https://www.instructables.com/Rubiks-Clock/
 
 The implementation is based on the javascript/HTML code of Cuber found at https://github.com/stewdio/Cuber-DEMO. Cuber is a Rubik’s Cube simulator.  Rubik's Clock adds the concept of a photo cube to
