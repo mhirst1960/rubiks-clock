@@ -1,8 +1,8 @@
 [Desktop Entry] 
 Name=Rubiks Clock
 
-Exec=/usr/bin/chromium-browser  --app='file:///home/pi/rubiks-clock/index.html#giantclock12' --start-fullscreen --disable-session-crashed-bubble
-#Exec=/usr/bin/chromium-browser  --app='file:///home/pi/rubiks-clock/index.html#experiments' --start-fullscreen --disable-session-crashed-bubble
+
+Exec=/usr/bin/chromium-browser --kiosk 'file:///home/pi/rubiks-clock/index.html#giantclock12'
 
 Type=application
 Terminal=false

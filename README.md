@@ -104,10 +104,9 @@ I used these instructions to install the 4 inch display from the command line fr
   cd LCD-show/
   sudo ./MPI4008-show
 
-Then from the command line I run this (and hit F11 to exit full screen mode):
+Then from the command line I run this (and hit CTRL-F4 to exit):
 
-`/usr/bin/chromium-browser --start-fullscreen --app='file:///home/pi/rubiks-clock/index.html#clock12'`
-
+/usr/bin/chromium-browser --kiosk 'file:///home/pi/rubiks-clock/index.html#clock12'
 
 ## Install
 If you put the top directory rubiks-clock directly under /home/pi, you can run these commands to install so it will automatically start every time you plug in your Raspberry.
@@ -205,7 +204,6 @@ You will need:
   - 
 
 Install Raspberry Imager onto your PC (https://www.raspberrypi.com/software/)
-)
 
 Run the Raspberry Pi Imager on your PC
 
